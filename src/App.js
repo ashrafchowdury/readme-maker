@@ -1,24 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
-
+import Navbar from "./components/navigation/Navbar";
+import Aside from "./components/navigation/Aside";
+import Editor from "./components/editor/Editor";
+import IconsSelector from "./components/editor/IconsSelector";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className=" w-[90%] sm:w-[550px] md:w-[767px] lg:w-[1023px] xl:w-[1400px] mx-auto">
+      <Navbar />
+      <section className=" flex justify-between">
+        <Editor />
+        <Aside />
+      </section>
+      {/* <IconsSelector /> */}
+    </main>
   );
 }
 

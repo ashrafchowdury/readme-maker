@@ -1,13 +1,57 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer base {
+  * {
+    @apply font-['Prompt'] text-darkBg dark:text-lightBg;
+  }
+  body {
+    @apply bg-lightBg dark:bg-darkBg duration-500;
+  }
+  .editorMenu button {
+    @apply w-8 h-8 flex justify-center items-center rounded-lg bg-light dark:bg-dark ring-light dark:ring-dark focus:ring-2 text-xl duration-500;
+  }
+  .selection button {
+    @apply border !w-full !my-6 text-start hover:scale-105 duration-500;
+  }
+
+  .inlineSelector button {
+    @apply text-lg;
+  }
+  .editor .ql-container {
+    @apply !border-none;
+  }
+  .editor .ql-editor {
+    @apply w-[1050px] h-[81vh] !border border-light dark:border-dark rounded-lg p-7;
+  }
+  .editor p {
+    @apply text-lg !my-4;
+  }
+
+  .editor .ql-editor.ql-blank::before {
+    @apply text-lg text-light py-4 px-6 capitalize;
+  }
+  .editor ul,
+  ol {
+    @apply !px-0 !my-5;
+  }
+  .editor li {
+    @apply text-lg !px-4;
+  }
+  .editor .ql-editor pre {
+    @apply !bg-light dark:!bg-dark !p-5 text-[16px] !rounded-lg;
+  }
+  .editor .ql-editor h1 {
+    @apply !text-3xl py-3 border-b border-dark dark:placeholder:text-light;
+  }
+  .editor .ql-editor h2 {
+    @apply !text-2xl py-3 border-b border-dark;
+  }
+  .editor .ql-tooltip {
+    @apply bg-light dark:bg-dark text-darkBg dark:text-lightBg !border-none !shadow-none !py-3 !px-6 rounded-lg !left-6;
+  }
+  .editor .ql-tooltip input {
+    @apply !w-[250px] bg-lightBg dark:bg-darkBg text-darkBg dark:text-lightBg rounded-lg !py-4 !px-3 !border-none outline-none;
+  }
 }
