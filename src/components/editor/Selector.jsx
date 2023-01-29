@@ -13,7 +13,13 @@ import {
   BiWindowAlt,
   BiHorizontalCenter,
 } from "react-icons/bi";
-const Selector = ({ condition, setisSelector, setselectIcons }) => {
+const Selector = ({
+  condition,
+  setisSelector,
+  setselectIcons,
+  placeholder,
+  setplaceholder,
+}) => {
   const selectors = [
     {
       styleName: "",
@@ -50,7 +56,7 @@ const Selector = ({ condition, setisSelector, setselectIcons }) => {
       value: "ordered",
     },
     {
-      styleName: "",
+      styleName: "ql-iconHandler",
       icon: <BiImages className=" text-2xl" />,
       title: "Icons",
       des: "Insert Your Skills Icons",
@@ -94,9 +100,14 @@ const Selector = ({ condition, setisSelector, setselectIcons }) => {
     // },
   ];
 
-  const handleRemoveSelactor = (component) => {
+  const handleRemoveSelactor = (component, styleName) => {
     setisSelector(false);
     component == "icons" && setselectIcons(true);
+    if (styleName == "ql-header" || styleName == "") {
+      setplaceholder({ ...placeholder, display: true });
+    } else {
+      setplaceholder({ ...placeholder, display: false });
+    }
   };
   return (
     <section
@@ -108,7 +119,9 @@ const Selector = ({ condition, setisSelector, setselectIcons }) => {
           <button
             className={value.styleName}
             value={value?.value}
-            onClick={() => handleRemoveSelactor(value?.component)}
+            onClick={() =>
+              handleRemoveSelactor(value?.component, value.styleName)
+            }
           >
             <div className="flex items-center cursor-pointer">
               <div className=" w-[55px] h-[55px] rounded-md bg-lightBg dark:bg-darkBg flex items-center justify-center">

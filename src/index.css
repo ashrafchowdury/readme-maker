@@ -28,7 +28,9 @@
   .editor p {
     @apply text-lg !my-4;
   }
-
+  .editor p:has(img) {
+    @apply flex flex-wrap space-x-2 space-y-2;
+  }
   .editor .ql-editor.ql-blank::before {
     @apply text-lg text-light py-4 px-6 capitalize;
   }

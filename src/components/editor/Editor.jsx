@@ -4,11 +4,11 @@ import "react-quill/dist/quill.snow.css";
 import Selector from "./Selector";
 import InlineSelector from "./InlineSelector";
 import EditorMenu from "./EditorMenu";
-import IconsSelector from "./IconsSelector";
 import useMousePosition from "../../utils/hooks/useMousePosition";
 import {
   imageHandler,
   dividerInsert,
+  iconHandler,
 } from "../../utils/functions/quill-functions";
 import ImageResize from "quill-image-resize-module-react";
 
@@ -36,7 +36,7 @@ Hr.tagName = "hr";
 Quill.register({
   "formats/hr": Hr,
 });
-Quill.register("modules/imageResize", ImageResize);
+Quill.register({ "modules/imageResize": ImageResize });
 
 const CustomToolbar = ({
   mouse,
@@ -44,6 +44,8 @@ const CustomToolbar = ({
   selector,
   setisSelector,
   setselectIcons,
+  placeholder,
+  setplaceholder,
 }) => {
   return (
     <div
@@ -59,6 +61,8 @@ const CustomToolbar = ({
         condition={selector}
         setisSelector={setisSelector}
         setselectIcons={setselectIcons}
+        setplaceholder={setplaceholder}
+        placeholder={placeholder}
       />
     </div>
   );
@@ -97,6 +101,7 @@ const Editor = () => {
       handlers: {
         imageHandler: imageHandler, //Add it here
         dividerInsert: dividerInsert,
+        iconHandler: iconHandler,
       },
     },
     imageResize: {
@@ -177,6 +182,8 @@ const Editor = () => {
           selector={isSelector ? "" : "hidden"}
           setisSelector={setisSelector}
           setselectIcons={setselectIcons}
+          placeholder={placeholder}
+          setplaceholder={setplaceholder}
         />
         <div onClick={handleKey}>
           <ReactQuill
