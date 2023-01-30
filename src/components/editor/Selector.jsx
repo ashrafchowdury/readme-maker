@@ -75,12 +75,6 @@ const Selector = ({
       des: "Write Code",
     },
     {
-      styleName: "",
-      icon: <FaTable className=" text-2xl" />,
-      title: "Table",
-      des: "Create A Simple Table",
-    },
-    {
       styleName: "ql-video",
       icon: <BiWindowAlt className=" text-2xl" />,
       title: "Embed",
@@ -92,6 +86,12 @@ const Selector = ({
       title: "Divider",
       des: "Add Divider Between To Block",
     },
+    // {
+    //   styleName: "ql-table",
+    //   icon: <FaTable className=" text-2xl" />,
+    //   title: "Table",
+    //   des: "Create A Simple Table",
+    // },
     // {
     //   styleName: "ql-",
     //   icon: "",

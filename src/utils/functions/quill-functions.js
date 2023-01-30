@@ -43,7 +43,7 @@ export function iconHandler() {
   };
 
   tooltip.edit("image");
-  tooltip.textbox.placeholder = "Add Language Name";
+  tooltip.textbox.placeholder = "Add Multiple Language Name By ,";
 }
 
 export function dividerInsert() {

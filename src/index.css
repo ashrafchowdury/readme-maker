@@ -28,6 +28,9 @@
   .editor p {
     @apply text-lg !my-4;
   }
+  .editor img {
+    @apply cursor-pointer;
+  }
   .editor p:has(img) {
     @apply flex flex-wrap space-x-2 space-y-2;
   }
@@ -54,6 +57,12 @@
     @apply bg-light dark:bg-dark text-darkBg dark:text-lightBg !border-none !shadow-none !py-3 !px-6 rounded-lg !left-6;
   }
   .editor .ql-tooltip input {
-    @apply !w-[250px] bg-lightBg dark:bg-darkBg text-darkBg dark:text-lightBg rounded-lg !py-4 !px-3 !border-none outline-none;
+    @apply !w-[250px] bg-lightBg dark:bg-darkBg text-darkBg dark:text-lightBg rounded-lg !py-5 !px-3 !border-none outline-none;
+  }
+  .editor .ql-tooltip .ql-action {
+    @apply bg-primary text-lightBg py-[8.5px] px-3 rounded-lg ml-2;
+  }
+  .editor .ql-tooltip .ql-action::after {
+    @apply !m-0;
   }
 }

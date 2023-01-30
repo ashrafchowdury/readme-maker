@@ -94,6 +94,7 @@ const Editor = () => {
       }
     };
   }, []);
+
   //modules
   const modules = {
     toolbar: {
@@ -154,11 +155,13 @@ const Editor = () => {
       setisSelector(false);
     }
     handlePlaceholder(position, 260, 173);
-    const tagName = window.getSelection().baseNode.localName;
+    const tagName = window.getSelection()?.baseNode?.localName;
     if (tagName == "h1") {
       handlePlaceholder(position, 260, 180, 30, "Heading 1");
     } else if (tagName == "h2") {
       handlePlaceholder(position, 260, 175, 24, "Heading 2");
+    } else if (window.getSelection()?.baseNode?.firstChild.localName == "img") {
+      setplaceholder({ ...placeholder, display: false });
     } else if (tagName == "p" || tagName == "div") {
       handlePlaceholder(
         position,
