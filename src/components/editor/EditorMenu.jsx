@@ -1,5 +1,12 @@
 import React from "react";
-import { BiSave, BiX, BiDownload, BiCopyAlt } from "react-icons/bi";
+import {
+  BiSave,
+  BiX,
+  BiDownload,
+  BiCopyAlt,
+  BiNotepad,
+  BiCheckCircle,
+} from "react-icons/bi";
 
 const EditorMenu = ({ value, setValue }) => {
   const handleDownload = () => {};
@@ -9,8 +16,16 @@ const EditorMenu = ({ value, setValue }) => {
   return (
     <>
       <div className="editorMenu flex justify-between items-center h-[60px] px-4 border border-light dark:border-dark rounded-lg mb-3">
-        <p className=" font-medium">Editor</p>
+        <p className=" flex items-center font-medium">
+          Editor{" "}
+          <span className=" text-green-500 ml-2 text-lg">
+            <BiCheckCircle />
+          </span>
+        </p>
         <div className=" flex items-center space-x-3">
+          <button>
+            <BiNotepad />
+          </button>
           <button
             onClick={() => {
               navigator.clipboard.writeText(value);

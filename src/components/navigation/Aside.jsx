@@ -3,7 +3,7 @@ import { BiFile, BiHighlight } from "react-icons/bi";
 const Aside = () => {
   return (
     <>
-      <aside className=" flex flex-col justify-between items-start w-[350px] h-[89vh] border border-light dark:border-dark rounded-lg ml-2 py-4 px-4">
+      <aside className=" flex flex-col justify-between items-start lg:w-[300px] xl:w-[350px] h-[89vh] border border-light dark:border-dark rounded-lg ml-2 py-4 px-4">
         <section className=" w-full">
           <p className=" text-xl font-bold mb-6">Pree Build Tamplates</p>
           <div className=" flex items-center bg-light dark:bg-dark py-2 px-3 rounded-lg my-3">

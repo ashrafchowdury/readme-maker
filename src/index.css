@@ -23,7 +23,7 @@
     @apply !border-none;
   }
   .editor .ql-editor {
-    @apply w-[1050px] h-[81vh] !border border-light dark:border-dark rounded-lg p-7;
+    @apply w-full min-h-[81vh] max-h-full !border border-light dark:border-dark rounded-lg p-7 overflow-hidden;
   }
   .editor p {
     @apply text-lg !my-4;

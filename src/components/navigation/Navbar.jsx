@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BiSun, BiMoon, BiQuestionMark } from "react-icons/bi";
+import { BiSun, BiMoon, BiQuestionMark, BiSidebar } from "react-icons/bi";
 
 const Navbar = () => {
   //use for change the theme
@@ -45,8 +45,11 @@ const Navbar = () => {
       <h1 className=" text-2xl lg lg:text-4xl font-bold ">Readme Maker</h1>
       <div className=" flex items-center space-x-3">
         <button className=" w-9 h-9 flex justify-center items-center rounded-lg bg-light dark:bg-dark ring-light dark:ring-dark focus:ring-2 text-xl duration-500">
-          <BiQuestionMark />
+          <BiSidebar />
         </button>
+        {/* <button className=" w-9 h-9 flex justify-center items-center rounded-lg bg-light dark:bg-dark ring-light dark:ring-dark focus:ring-2 text-xl duration-500">
+          <BiQuestionMark />
+        </button> */}
         <button
           className=" w-9 h-9 flex justify-center items-center rounded-lg bg-light dark:bg-dark ring-light dark:ring-dark focus:ring-2 text-xl duration-500"
           onClick={theme == "dark" ? handleLightTheme : handleDarkTheme}
