@@ -78,8 +78,8 @@ const TextEditor = () => {
     y: null,
   });
   const [placeholder, setplaceholder] = useState({
-    x: 290,
-    y: 217,
+    x: 35,
+    y: 37,
     display: true,
     size: 18,
     text: "Press / for open the selectors",
@@ -173,7 +173,7 @@ const TextEditor = () => {
   };
 
   return (
-    <div className=" lg:w-[720px] xl:w-[1050px]">
+    <div className=" w-full">
       <EditorMenu value={value} setValue={setValue} />
       <div onMouseUp={handleSelection} className="relative">
         <CustomToolbar

@@ -9,6 +9,7 @@
   body {
     @apply bg-lightBg dark:bg-darkBg duration-500;
   }
+
   .editorMenu button {
     @apply w-8 h-8 flex justify-center items-center rounded-lg bg-light dark:bg-dark ring-light dark:ring-dark focus:ring-2 text-xl duration-500;
   }

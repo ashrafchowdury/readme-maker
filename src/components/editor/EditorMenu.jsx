@@ -7,41 +7,44 @@ import {
   BiNotepad,
   BiCheckCircle,
 } from "react-icons/bi";
+import { toast } from "react-hot-toast";
+import { downloadFile } from "../../utils/functions/download";
+import Icons from "../utils/Icons";
 
 const EditorMenu = ({ value, setValue }) => {
-  const handleDownload = () => {};
   const handleClear = () => {
     setValue("");
+  };
+  const handleCopy = () => {
+    navigator.clipboard.writeText(value);
+    toast.success("Text copied successfully 👍");
   };
   return (
     <>
       <div className="editorMenu flex justify-between items-center h-[60px] px-4 border border-light dark:border-dark rounded-lg mb-3">
         <p className=" flex items-center font-medium">
-          Editor{" "}
+          Editor
           <span className=" text-green-500 ml-2 text-lg">
             <BiCheckCircle />
           </span>
         </p>
+
         <div className=" flex items-center space-x-3">
-          <button>
+          <Icons content="Add Preveous Data">
             <BiNotepad />
-          </button>
-          <button
-            onClick={() => {
-              navigator.clipboard.writeText(value);
-            }}
-          >
+          </Icons>
+          <Icons content="Copy Data" click={handleCopy}>
             <BiCopyAlt />
-          </button>
-          <button onClick={handleDownload}>
+          </Icons>
+          <Icons content="Download Readme File" click={() => downloadFile()}>
             <BiDownload />
-          </button>
-          <button>
+          </Icons>
+          <Icons content="Save File" click={() => downloadFile()}>
             <BiSave />
-          </button>
-          <button onClick={handleClear}>
+          </Icons>
+          <Icons content="Clear Data" click={handleClear}>
             <BiX />
-          </button>
+          </Icons>
         </div>
       </div>
     </>
