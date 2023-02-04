@@ -1,10 +1,12 @@
 import React from "react";
 import { BiFile, BiHighlight } from "react-icons/bi";
+
+
 const Aside = ({ sidebar }) => {
   if (sidebar) {
     return (
       <>
-        <aside className=" flex flex-col justify-between items-start lg:w-[360px] xl:w-[400px] h-[89vh] border border-light dark:border-dark rounded-lg ml-2 py-4 px-4">
+        <aside className=" absolute top-24 right-0 lg:top-0  lg:relative dark:bg-darkBg flex flex-col justify-between items-start w-[320px] lg:w-[360px] xl:w-[400px] h-[89vh] border border-light dark:border-dark rounded-lg ml-2 py-4 px-4">
           <section className=" w-full">
             <p className=" text-xl font-bold mb-6">Pree Build Tamplates</p>
             <div className=" flex items-center bg-light dark:bg-dark py-2 px-3 rounded-lg my-3">
