@@ -4,7 +4,6 @@ import "react-quill/dist/quill.snow.css";
 import Selector from "./Selector";
 import InlineSelector from "./InlineSelector";
 import EditorMenu from "./EditorMenu";
-import useMousePosition from "../../utils/hooks/useMousePosition";
 import {
   imageHandler,
   dividerInsert,
@@ -84,7 +83,6 @@ const TextEditor = () => {
     size: 18,
     text: "Press / for open the selectors",
   });
-  const mousePosition = useMousePosition();
   const editor = useRef(null);
 
   useEffect(() => {
@@ -115,6 +113,8 @@ const TextEditor = () => {
     settextSelected(window.getSelection().toString());
   };
   const handleToolTip = () => {
+    const quillEdior = editor.current.getEditor();
+    const position = quillEdior.getBounds(quillEdior.getSelection()?.index);
     if (window.getSelection()?.anchorNode.data == undefined) {
       setplaceholder({ ...placeholder, display: true });
     } else {
@@ -123,8 +123,8 @@ const TextEditor = () => {
 
     if (textSelected != "") {
       setmousePositionForSelectors({
-        x: mousePosition.x,
-        y: mousePosition.y,
+        x: position.left - 80,
+        y: position.top - 60,
       });
     } else {
       return null;
