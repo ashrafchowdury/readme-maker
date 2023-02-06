@@ -8,7 +8,7 @@ import Editor from "./pages/Editor";
 
 function App() {
   return (
-    <>
+    <main className=" w-[90%] sm:w-[550px] md:w-[767px] lg:w-[1023px] xl:w-[1400px] mx-auto">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/editor" element={<Editor />} animate={true} />
@@ -17,7 +17,7 @@ function App() {
         <Toaster position="top-center" reverseOrder={false} />
         <Tooltips />
       </TooltipProvider>
-    </>
+    </main>
   );
 }
 
