@@ -19,6 +19,10 @@ const EditorMenu = ({ value, setValue }) => {
     navigator.clipboard.writeText(value);
     toast.success("Text copied successfully 👍");
   };
+  const handlePrevData = () => {
+    const data = window.prompt("Add Previous Data");
+    setValue(data);
+  };
   return (
     <>
       <div className="editorMenu flex justify-between items-center h-[60px] px-4 border border-light dark:border-dark rounded-lg mb-3">
@@ -30,7 +34,7 @@ const EditorMenu = ({ value, setValue }) => {
         </p>
 
         <div className=" flex items-center space-x-3">
-          <Icons content="Add Preveous Data">
+          <Icons content="Add Preveous Data" click={handlePrevData}>
             <BiNotepad />
           </Icons>
           <Icons content="Copy Data" click={handleCopy}>
@@ -39,7 +43,7 @@ const EditorMenu = ({ value, setValue }) => {
           <Icons content="Download Readme File" click={() => downloadFile()}>
             <BiDownload />
           </Icons>
-          <Icons content="Save File" click={() => downloadFile()}>
+          <Icons content="Save File">
             <BiSave />
           </Icons>
           <Icons content="Clear Data" click={handleClear}>
