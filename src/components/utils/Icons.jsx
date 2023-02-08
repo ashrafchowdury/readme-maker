@@ -1,4 +1,3 @@
-import React from "react";
 import { TooltipWrapper } from "react-tooltip";
 
 const Icons = ({ content, click, children, style }) => {

@@ -1,5 +1,11 @@
 import Navbar from "../components/navigation/Navbar";
-import { BiFile, BiDownload, BiReceipt, BiCopyAlt } from "react-icons/bi";
+import {
+  BiFile,
+  BiDownload,
+  BiReceipt,
+  BiCopyAlt,
+  BiChevronDown,
+} from "react-icons/bi";
 import {
   FaStar,
   FaHeading,
@@ -9,9 +15,9 @@ import {
   FaGithub,
   FaLaptopCode,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Home = () => {
-
   return (
     <>
       <Navbar />
@@ -21,18 +27,17 @@ const Home = () => {
             Make your <span className=" text-primary">Readme.md</span> file with
             in a minutes
           </h1>
-          <h2></h2>
           <p className=" my-5">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque
             accusantium molestiae perspiciatis neque quisquam odit, ratione nam
             a sequi pariatur reiciendis harum nisi quas aliquam adipisci id iste
             quod expedita!
           </p>
-          <button
-            className=" py-2 px-7 rounded-lg font-bold bg-primary text-lightBg mt-10"
-          >
-            Create Readme File
-          </button>
+          <Link to="/editor">
+            <button className=" py-2 px-7 rounded-lg font-bold bg-primary text-lightBg mt-10">
+              Create Readme File
+            </button>
+          </Link>
         </div>
         <img
           src="header1.png"
@@ -53,7 +58,7 @@ const Home = () => {
 
         <div className="flex justify-center items-center space-x-9 mt-16">
           <div className=" w-[290px] h-[250px] text-center p-4 rounded-lg hover:scale-105 duration-700 cursor-default">
-            <div className=" bg-dark w-[52px] h-[52px] rounded-lg flex justify-center items-center mx-auto mb-6">
+            <div className=" bg-light dark:bg-dark w-[52px] h-[52px] rounded-lg flex justify-center items-center mx-auto mb-6">
               <BiFile className=" text-3xl" />
             </div>
             <p className=" text-xl font-semibold mb-3 ">Save Tamplates</p>
@@ -63,7 +68,7 @@ const Home = () => {
             </p>
           </div>
           <div className=" w-[290px] h-[250px] text-center p-4 rounded-lg hover:scale-105 duration-700 cursor-default">
-            <div className=" bg-dark w-[52px] h-[52px] rounded-lg flex justify-center items-center mx-auto mb-6">
+            <div className=" bg-light dark:bg-dark w-[52px] h-[52px] rounded-lg flex justify-center items-center mx-auto mb-6">
               <BiDownload className=" text-3xl" />
             </div>
             <p className=" text-xl font-semibold mb-3 ">Download File</p>
@@ -73,7 +78,7 @@ const Home = () => {
             </p>
           </div>
           <div className=" w-[290px] h-[250px] text-center p-4 rounded-lg hover:scale-105 duration-700 cursor-default">
-            <div className=" bg-dark w-[52px] h-[52px] rounded-lg flex justify-center items-center mx-auto mb-6">
+            <div className=" bg-light dark:bg-dark w-[52px] h-[52px] rounded-lg flex justify-center items-center mx-auto mb-6">
               <BiReceipt className=" text-3xl" />
             </div>
             <p className=" text-xl font-semibold mb-3 ">Custom Selector</p>
@@ -83,7 +88,7 @@ const Home = () => {
             </p>
           </div>
           <div className=" w-[290px] h-[250px] text-center p-4 rounded-lg hover:scale-105 duration-700 cursor-default">
-            <div className=" bg-dark w-[52px] h-[52px] rounded-lg flex justify-center items-center mx-auto mb-6">
+            <div className=" bg-light dark:bg-dark w-[52px] h-[52px] rounded-lg flex justify-center items-center mx-auto mb-6">
               <BiCopyAlt className=" text-3xl" />
             </div>
             <p className=" text-xl font-semibold mb-3 ">Copy Data</p>
@@ -96,7 +101,7 @@ const Home = () => {
       </section>
 
       <section className="h-[80vh] my-12 flex justify-between items-center">
-        <div className=" w-[550px] h-[520px] relative bg-dark rounded-lg">
+        <div className=" w-[550px] h-[520px] relative bg-light dark:bg-dark rounded-lg">
           <img
             src="inline.png"
             alt=""
@@ -133,8 +138,8 @@ const Home = () => {
             consequatur illo, soluta nam perferendis quis dignissimos iure eius
           </p>
         </div>
-        <div className=" w-[580px] h-[520px] relative bg-dark rounded-lg">
-          <div className=" py-4 px-6 w-[300px] rounded-lg bg-darkBg drop-shadow-xl absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+        <div className=" w-[580px] h-[520px] relative bg-light dark:bg-dark rounded-lg">
+          <div className=" py-4 px-6 w-[300px] rounded-lg bg-lightBg dark:bg-darkBg drop-shadow-xl absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
             <p className=" text-xl font-medium mb-5">Styles</p>
             <div className=" flex items-center my-2">
               <FaStar className=" text-lg" />{" "}
@@ -178,22 +183,22 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="w-[220px] h-[65px] p-3 flex items-center bg-darkBg rounded-lg absolute top-7 right-9 shadow-md shadow-dark">
-            <div className=" w-[42px] h-[42px] rounded-md bg-lightBg dark:bg-dark flex items-center justify-center">
+          <div className="w-[220px] h-[65px] p-3 flex items-center bg-lightBg dark:bg-darkBg rounded-lg absolute top-7 right-9 shadow-md shadow-light dark:shadow-dark">
+            <div className=" w-[42px] h-[42px] rounded-md bg-light dark:bg-dark flex items-center justify-center">
               <FaHeading />
             </div>
             <div className=" ml-4">
-              <p className=" mb-1">Heading 1</p>
+              <p className=" font-semibold mb-1">Heading 1</p>
               <p className="text-xs">Big Header</p>
             </div>
           </div>
 
-          <div className="w-[220px] h-[65px] p-3 flex items-center bg-darkBg rounded-lg absolute bottom-4 left-5 shadow-xl shadow-dark">
-            <div className=" w-[42px] h-[42px] rounded-md bg-lightBg dark:bg-dark flex items-center justify-center">
+          <div className="w-[220px] h-[65px] p-3 flex items-center bg-lightBg dark:bg-darkBg rounded-lg absolute bottom-4 left-5 shadow-xl shadow-light dark:shadow-dark">
+            <div className=" w-[42px] h-[42px] rounded-md bg-light dark:bg-dark flex items-center justify-center">
               <FaCode />
             </div>
             <div className=" ml-4">
-              <p className=" mb-1">Code Block</p>
+              <p className=" font-semibold mb-1">Code Block</p>
               <p className="text-xs">Add Codes</p>
             </div>
           </div>
@@ -211,7 +216,7 @@ const Home = () => {
         </p>
 
         <div className="flex justify-center items-center space-x-9 mt-24">
-          <div className=" w-[400px] h-[220px] text-start p-6 rounded-lg bg-dark cursor-default">
+          <div className=" w-[400px] h-[220px] text-start p-6 rounded-lg bg-light dark:bg-dark cursor-default">
             <div className=" flex items-center mb-5">
               <img
                 src="https://pbs.twimg.com/profile_images/1564855868012654593/3qgdCKAr_400x400.jpg"
@@ -229,7 +234,7 @@ const Home = () => {
               voluptatem?
             </p>
           </div>
-          <div className=" w-[400px] h-[220px] text-start p-6 rounded-lg bg-dark cursor-default">
+          <div className=" w-[400px] h-[220px] text-start p-6 rounded-lg bg-light dark:bg-dark cursor-default">
             <div className=" flex items-center mb-5">
               <img
                 src="https://scontent.fcgp3-1.fna.fbcdn.net/v/t39.30808-6/278958151_1151446615808551_3460948444864851225_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeH7aQEkW03aSqHAU7u_DFNfIDmD5FdFWCYgOYPkV0VYJjrCJoTLWCIwPEiKnTLrCXN3aytWylmEbQ8Jxo2UkZQD&_nc_ohc=aAyVeq6S4coAX8s1kB8&_nc_ht=scontent.fcgp3-1.fna&oh=00_AfAo4RL-4et4JiX7pgo8qC62ovRFIhSVjLRADvZ6AgHBUw&oe=63E759F9"
@@ -247,7 +252,7 @@ const Home = () => {
               voluptatem?
             </p>
           </div>
-          <div className=" w-[400px] h-[220px] text-start p-6 rounded-lg bg-dark cursor-default">
+          <div className=" w-[400px] h-[220px] text-start p-6 rounded-lg bg-light dark:bg-dark cursor-default">
             <div className=" flex items-center mb-5">
               <img
                 src="https://scontent.fcgp3-1.fna.fbcdn.net/v/t39.30808-6/279507988_1151447079141838_912784402980314542_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=e3f864&_nc_eui2=AeHAbvZJDECkrsFUay5tXpQ8CcfFFHJwYyoJx8UUcnBjKmBkAoYXQtLwoSFSKgSwBkmu1biiWn6IQFKawzafsqsn&_nc_ohc=v3gDBuwQFpsAX-K3yfc&_nc_ht=scontent.fcgp3-1.fna&oh=00_AfANAY2p_sTrziR8GkCBt-uPVDLzVT0xSMJTECW9nWmF9Q&oe=63E61462"
@@ -267,6 +272,69 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      <main class="flex flex-col items-center mx-auto my-12 min-h-[70vh] max-h-full">
+        <p className=" text-primary font-semibold mb-4">FQA</p>
+        <h2 className=" text-5xl font-bold mb-7 ml-5">Got questions?</h2>
+        <p>
+          Here are some nice things our users have said about our Editor.
+          (totally fake).
+        </p>
+
+        <section class="flex flex-col space-y-6 mx-auto w-[850px] mt-24">
+          <details class="group py-3 text-lg border-b border-light dark:border-dark">
+            <summary class="flex items-center justify-between cursor-pointer py-1 font-medium text-xl">
+              How this Readme Maker works?
+              <BiChevronDown className=" text-3xl rotate-0 transform group-open:rotate-180" />
+            </summary>
+            <p className=" py-5 font-normal">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
+              recusandae ex labore consequuntur doloribus dicta rerum nisi, amet
+              voluptates sit sed non, nihil voluptatibus velit quae magni,
+              consequatur minus quod.
+            </p>
+          </details>
+
+          <details class="group py-3 text-lg border-b border-light dark:border-dark">
+            <summary class="flex items-center justify-between cursor-pointer py-1 font-medium text-xl">
+              Can I save the tamplates?
+              <BiChevronDown className=" text-3xl rotate-0 transform group-open:rotate-180" />
+            </summary>
+            <p className=" py-5 font-normal">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
+              recusandae ex labore consequuntur doloribus dicta rerum nisi, amet
+              voluptates sit sed non, nihil voluptatibus velit quae magni,
+              consequatur minus quod.
+            </p>
+          </details>
+
+          <details class="group py-3 text-lg border-b border-light dark:border-dark">
+            <summary class="flex items-center justify-between cursor-pointer py-1 font-medium text-xl">
+              I need to for using this applicaton?
+              <BiChevronDown className=" text-3xl rotate-0 transform group-open:rotate-180" />
+            </summary>
+            <p className=" py-5 font-normal">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
+              recusandae ex labore consequuntur doloribus dicta rerum nisi, amet
+              voluptates sit sed non, nihil voluptatibus velit quae magni,
+              consequatur minus quod.
+            </p>
+          </details>
+
+          <details class="group py-3 text-lg border-b border-light dark:border-dark">
+            <summary class="flex items-center justify-between cursor-pointer py-1 font-medium text-xl">
+              How can I trust this platform?
+              <BiChevronDown className=" text-3xl rotate-0 transform group-open:rotate-180" />
+            </summary>
+            <p className=" py-5 font-normal">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
+              recusandae ex labore consequuntur doloribus dicta rerum nisi, amet
+              voluptates sit sed non, nihil voluptatibus velit quae magni,
+              consequatur minus quod.
+            </p>
+          </details>
+        </section>
+      </main>
 
       <footer className=" flex flex-col justify-center items-center space-y-9 mb-20">
         <p className=" text-2xl font-bold">Readme Maker</p>

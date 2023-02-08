@@ -5,15 +5,22 @@ import "react-tooltip/dist/react-tooltip.css";
 import Tooltips from "./components/utils/Tooltips";
 import Home from "./pages/Home";
 import Editor from "./pages/Editor";
+import Signup from "./pages/Signup";
+import Tamplates from "./pages/Tamplates";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
     <main className=" w-[90%] sm:w-[550px] md:w-[767px] lg:w-[1023px] xl:w-[1400px] mx-auto">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/editor" element={<Editor />} animate={true} />
-      </Routes>
       <TooltipProvider>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/editor" element={<Editor />} animate={true} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/tamplates" element={<Tamplates />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+
         <Toaster position="top-center" reverseOrder={false} />
         <Tooltips />
       </TooltipProvider>
