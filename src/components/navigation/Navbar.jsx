@@ -95,16 +95,16 @@ const Navbar = ({ setsidebar }) => {
           </button>
         </Link>
 
-        {/* <div className="relative">
+        <div className="relative">
           <button
             onClick={() => setOpen(!open)}
-            className="flex items-center justify-center py-2 px-5 rounded-lg font-bold bg-primary text-lightBg"
+            className="flex items-center justify-center py-2 px-6 rounded-lg font-bold bg-primary text-lightBg"
           >
-            <span>Dropdown</span>
-            <BiChevronDown className=" text-2xl " />
+            <span>Profile</span>
+            <BiChevronDown className=" text-2xl ml-3" />
           </button>
           {open && (
-            <div className="absolute right-0 w-full mt-2 origin-top-right rounded-lg shadow-lg">
+            <div className="absolute z-30 right-0 w-full mt-2 origin-top-right rounded-lg shadow-lg">
               <div className="px-2 py-2 bg-light dark:bg-dark rounded-lg shadow flex flex-col space-y-2">
                 <Link
                   to="/profile"
@@ -124,7 +124,7 @@ const Navbar = ({ setsidebar }) => {
               </div>
             </div>
           )}
-        </div> */}
+        </div>
       </div>
     </nav>
   );
