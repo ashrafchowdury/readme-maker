@@ -60,7 +60,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="h-[80vh] my-12 flex justify-between items-center">
+      <section className="h-[80vh] w-[1250px] mx-auto my-12 flex justify-between items-center">
         <div className=" w-[550px] h-[520px] relative bg-light dark:bg-dark rounded-lg">
           <img
             src="inline.png"
@@ -85,7 +85,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="h-[80vh] my-12 flex justify-between items-center">
+      <section className="h-[80vh] w-[1250px] mx-auto my-12 flex justify-between items-center">
         <div className=" w-[600px]">
           <h2 className=" text-4xl font-bold mb-7">
             Components to keep things organised
