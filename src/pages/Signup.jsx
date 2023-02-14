@@ -1,20 +1,43 @@
-import React from "react";
+import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { FaTwitter, FaArrowLeft } from "react-icons/fa";
+import { FaTwitter } from "react-icons/fa";
 import Navbar from "../components/navigation/Navbar";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { account } from "../appwrite/appwriteConfig";
+import { v4 as uuidv4 } from "uuid";
+
 const Signup = () => {
-  const handleRedirect = () => {
-    window.history.back();
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = async () => {
+    if (!email || !password) {
+      toast.error("Pleace fillup all the fileds");
+    } else {
+      try {
+        await account.create(uuidv4(), email, password);
+        toast.success("Signup successfully");
+        navigate("/editor");
+      } catch (error) {
+        if (
+          error.message ==
+          "A user with the same email already exists in your project."
+        ) {
+          await account.createEmailSession(email, password);
+          toast.success("Login successfully");
+          navigate("/editor");
+        } else {
+          toast.error("Something was wrong! 🤷‍♀️");
+        }
+      }
+    }
   };
+  const handleGoogle = () => {};
   return (
     <>
       <Navbar />
-      <button
-        className=" absolute top-32 left-64 py-2 px-2 rounded-full border border-light dark:border-dark"
-        onClick={handleRedirect}
-      >
-        <FaArrowLeft className=" text-xl" />
-      </button>
 
       <section className="flex justify-center space-x-9 mt-[200px]">
         <div className="w-[300px]">
@@ -24,12 +47,15 @@ const Signup = () => {
           <p>Quickly get started by signing in using your existing accounts.</p>
         </div>
 
-        <form className=" w-[400px]">
+        <section className=" w-[400px]">
           <p className=" text-lg font-medium mb-6">
             Choose you signing methods
           </p>
 
-          <button className="w-full flex items-center justify-center bg-light dark:bg-dark font-semibold rounded-lg px-4 py-3">
+          <button
+            className="w-full flex items-center justify-center bg-light dark:bg-dark font-semibold rounded-lg px-4 py-3"
+            onClick={handleGoogle}
+          >
             <FcGoogle className=" text-[25px]" />
             <span className="ml-3">Log in with Google</span>
           </button>
@@ -39,24 +65,36 @@ const Signup = () => {
           </button>
 
           <hr className="my-6 border-light dark:border-dark w-full" />
-          <label class=" font-semibold">Enter your email</label>
+
+          <label class=" font-medium">Enter your Email</label>
           <input
             type="email"
-            name=""
+            name="email"
             placeholder="Enter Email Address"
-            className="w-full px-4 py-3 rounded-lg bg-light dark:bg-dark mt-2 outline-transparent"
+            className="w-full px-4 py-3 rounded-lg bg-light dark:bg-dark mt-2 mb-5 outline-transparent"
+            onChange={(e) => setemail(e.target.value)}
+            value={email}
             required
           />
-          <p className=" mt-6 mb-3">
-            We’ll email you a link for a password-free registration.
-          </p>
+
+          <label class=" font-medium">Enter your Paswword</label>
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter Password"
+            className="w-full px-4 py-3 rounded-lg bg-light dark:bg-dark mt-2 outline-transparent"
+            onChange={(e) => setpassword(e.target.value)}
+            value={password}
+            required
+          />
+
           <button
-            type="submit"
-            className="w-full bg-primary text-white font-semibold rounded-lg px-4 py-3"
+            className="w-full bg-primary text-white font-semibold rounded-lg px-4 py-3 mt-9"
+            onClick={handleSubmit}
           >
             Log In
           </button>
-        </form>
+        </section>
       </section>
     </>
   );
