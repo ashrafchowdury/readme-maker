@@ -6,11 +6,13 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { account } from "../appwrite/appwriteConfig";
 import { v4 as uuidv4 } from "uuid";
+import { useUser } from "../utils/hooks/userInfo";
 
 const Signup = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const navigate = useNavigate();
+  const { setuser } = useUser();
 
   const handleSubmit = async () => {
     if (!email || !password) {
@@ -18,6 +20,9 @@ const Signup = () => {
     } else {
       try {
         await account.create(uuidv4(), email, password);
+        await account.createEmailSession(email, password);
+        const data = await account.get();
+        setuser(data);
         toast.success("Signup successfully");
         navigate("/editor");
       } catch (error) {
@@ -26,9 +31,12 @@ const Signup = () => {
           "A user with the same email already exists in your project."
         ) {
           await account.createEmailSession(email, password);
+          const data = await account.get();
+          setuser(data);
           toast.success("Login successfully");
           navigate("/editor");
         } else {
+          // console.log(error);
           toast.error("Something was wrong! 🤷‍♀️");
         }
       }

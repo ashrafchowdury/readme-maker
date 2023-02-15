@@ -8,19 +8,20 @@ import Editor from "./pages/Editor";
 import Signup from "./pages/Signup";
 import Tamplates from "./pages/Tamplates";
 import Profile from "./pages/Profile";
-
+import UserDataProvider from "./utils/hooks/userInfo";
 function App() {
   return (
     <main className=" w-[90%] sm:w-[550px] md:w-[767px] lg:w-[1023px] xl:w-[1400px] mx-auto">
       <TooltipProvider>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/editor" element={<Editor />} animate={true} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/tamplates" element={<Tamplates />} />
-          <Route path="/profile" element={<Profile />} />
-        </Routes>
-
+        <UserDataProvider>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/editor" element={<Editor />} animate={true} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/tamplates" element={<Tamplates />} />
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
+        </UserDataProvider>
         <Toaster position="top-center" reverseOrder={false} />
         <Tooltips />
       </TooltipProvider>
