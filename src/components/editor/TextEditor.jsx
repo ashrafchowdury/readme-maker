@@ -67,8 +67,7 @@ const CustomToolbar = ({
   );
 };
 
-const TextEditor = () => {
-  const [value, setValue] = useState("");
+const TextEditor = ({ value, setValue }) => {
   const [textSelected, settextSelected] = useState("");
   const [selectIcons, setselectIcons] = useState(false);
   const [isSelector, setisSelector] = useState(false);

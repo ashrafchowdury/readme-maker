@@ -76,8 +76,6 @@ const Navbar = ({ setsidebar }) => {
       toast.error("Something was wrong!");
     }
   };
-  console.log(user);
-
   return (
     <nav className=" w-full h-[100px] flex justify-between items-center">
       <Link to="/">

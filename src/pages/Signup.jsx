@@ -20,7 +20,7 @@ const Signup = () => {
     } else {
       try {
         await account.create(uuidv4(), email, password);
-        await account.createEmailSession(email, password);
+        // await account.createEmailSession(email, password);
         const data = await account.get();
         setuser(data);
         toast.success("Signup successfully");
@@ -36,13 +36,24 @@ const Signup = () => {
           toast.success("Login successfully");
           navigate("/editor");
         } else {
-          // console.log(error);
+          console.log(error);
           toast.error("Something was wrong! 🤷‍♀️");
         }
       }
     }
   };
-  const handleGoogle = () => {};
+  const handleGoogle = async () => {
+    try {
+     account.createOAuth2Session("google");
+      const data = await account.get();
+      setuser(data);
+      toast.success("Signup successfully");
+      navigate("/editor");
+    } catch (error) {
+      console.log(error);
+      toast.error("Something was wrong! 🤷‍♀️");
+    }
+  };
   return (
     <>
       <Navbar />

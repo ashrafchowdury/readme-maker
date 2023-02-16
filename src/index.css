@@ -78,4 +78,15 @@
   .editor .ql-tooltip .ql-action::after {
     @apply !m-0;
   }
+  .popup {
+    background: linear-gradient(
+      244.43deg,
+      rgba(255, 255, 255, 0.511) 0%,
+      rgba(255, 255, 255, 0.17) 99.44%,
+      rgba(255, 255, 255, 0.24) 99.44%
+    );
+  }
+  .popup {
+    @apply absolute top-0 left-0 right-0 bottom-0 z-50 flex justify-center items-center;
+  }
 }

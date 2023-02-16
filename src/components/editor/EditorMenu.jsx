@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import {
   BiSave,
   BiX,
@@ -10,19 +10,18 @@ import {
 import { toast } from "react-hot-toast";
 import { downloadFile } from "../../utils/functions/download";
 import Icons from "../utils/Icons";
+import SaveData from "../popups/SaveData";
+import PrevData from "../popups/PrevData";
 
 const EditorMenu = ({ value, setValue }) => {
-  const handleClear = () => {
-    setValue("");
-  };
+  const [save, setsave] = useState(false);
+  const [prevPopup, setprevPopup] = useState(false);
+
   const handleCopy = () => {
     navigator.clipboard.writeText(value);
     toast.success("Text copied successfully 👍");
   };
-  const handlePrevData = () => {
-    const data = window.prompt("Add Previous Data");
-    setValue(data);
-  };
+
   return (
     <>
       <div className="editorMenu flex justify-between items-center h-[60px] px-4 border border-light dark:border-dark rounded-lg mb-3">
@@ -34,7 +33,7 @@ const EditorMenu = ({ value, setValue }) => {
         </p>
 
         <div className=" flex items-center space-x-3">
-          <Icons content="Add Preveous Data" click={handlePrevData}>
+          <Icons content="Add Preveous Data" click={() => setprevPopup(true)}>
             <BiNotepad />
           </Icons>
           <Icons content="Copy Data" click={handleCopy}>
@@ -43,14 +42,18 @@ const EditorMenu = ({ value, setValue }) => {
           <Icons content="Download Readme File" click={() => downloadFile()}>
             <BiDownload />
           </Icons>
-          <Icons content="Save File">
+          <Icons content="Save File" click={() => setsave(true)}>
             <BiSave />
           </Icons>
-          <Icons content="Clear Data" click={handleClear}>
+          <Icons content="Clear Data" click={() => setValue("")}>
             <BiX />
           </Icons>
         </div>
       </div>
+      {save && <SaveData setsave={setsave} value={value} />}
+      {prevPopup && (
+        <PrevData setprevPopup={setprevPopup} setValue={setValue} />
+      )}
     </>
   );
 };
