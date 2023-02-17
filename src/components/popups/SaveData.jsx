@@ -1,12 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { database } from "../../appwrite/appwriteConfig";
 import { HiX } from "react-icons/hi";
 import { toast } from "react-hot-toast";
 import { v4 as uuidv4 } from "uuid";
+import { useUser } from "../../utils/hooks/userInfo";
 
 const SaveData = ({ setsave, value }) => {
   const [title, settitle] = useState("");
   const [desc, setdesc] = useState("");
+  const { user } = useUser();
+
   const handleSave = async () => {
     if (!value) {
       toast.error("Add data first");
@@ -20,6 +23,7 @@ const SaveData = ({ setsave, value }) => {
             "readme-template": value, // attribute and value
             title: title,
             description: desc,
+            user: `${user?.email?.slice(0, user.email?.indexOf("@"))}`,
           }
         );
         toast.success("Save data successfully 👍");

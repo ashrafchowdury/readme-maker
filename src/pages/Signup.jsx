@@ -7,10 +7,12 @@ import { useNavigate } from "react-router-dom";
 import { account } from "../appwrite/appwriteConfig";
 import { v4 as uuidv4 } from "uuid";
 import { useUser } from "../utils/hooks/userInfo";
+import Loading from "../components/utils/Loading";
 
 const Signup = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
+  const [loading, setloading] = useState(false);
   const navigate = useNavigate();
   const { setuser } = useUser();
 
@@ -19,21 +21,24 @@ const Signup = () => {
       toast.error("Pleace fillup all the fileds");
     } else {
       try {
+        setloading(true);
         await account.create(uuidv4(), email, password);
-        // await account.createEmailSession(email, password);
         const data = await account.get();
         setuser(data);
         toast.success("Signup successfully");
+        setloading(false);
         navigate("/editor");
       } catch (error) {
         if (
           error.message ==
           "A user with the same email already exists in your project."
         ) {
+          setloading(true);
           await account.createEmailSession(email, password);
           const data = await account.get();
           setuser(data);
           toast.success("Login successfully");
+          setloading(false);
           navigate("/editor");
         } else {
           console.log(error);
@@ -44,7 +49,7 @@ const Signup = () => {
   };
   const handleGoogle = async () => {
     try {
-     account.createOAuth2Session("google");
+      account.createOAuth2Session("google");
       const data = await account.get();
       setuser(data);
       toast.success("Signup successfully");
@@ -58,7 +63,7 @@ const Signup = () => {
     <>
       <Navbar />
 
-      <section className="flex justify-center space-x-9 mt-[200px]">
+      <section className="flex justify-center space-x-9 mt-[160px]">
         <div className="w-[300px]">
           <h1 className=" text-3xl font-semibold mb-4">
             Log in or create an account
@@ -93,25 +98,23 @@ const Signup = () => {
             className="w-full px-4 py-3 rounded-lg bg-light dark:bg-dark mt-2 mb-5 outline-transparent"
             onChange={(e) => setemail(e.target.value)}
             value={email}
-            required
           />
 
           <label class=" font-medium">Enter your Paswword</label>
           <input
             type="password"
-            name="password"
             placeholder="Enter Password"
             className="w-full px-4 py-3 rounded-lg bg-light dark:bg-dark mt-2 outline-transparent"
             onChange={(e) => setpassword(e.target.value)}
             value={password}
-            required
           />
 
           <button
-            className="w-full bg-primary text-white font-semibold rounded-lg px-4 py-3 mt-9"
+            className="w-full bg-primary text-white text-center font-semibold rounded-lg px-4 py-3 mt-9"
             onClick={handleSubmit}
+            disabled={loading ? true : false}
           >
-            Log In
+            {loading ? <Loading load={loading} /> : "Log In"}
           </button>
         </section>
       </section>

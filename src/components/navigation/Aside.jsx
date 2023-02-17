@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { BiFile, BiHighlight, BiLoaderCircle } from "react-icons/bi";
+import { BiFile, BiHighlight } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { useUser } from "../../utils/hooks/userInfo";
 import { database } from "../../appwrite/appwriteConfig";
-
+import { Query } from "appwrite";
+import Loading from "../utils/Loading";
 const Aside = ({ sidebar, setValue }) => {
   const { user } = useUser();
   const [templates, settemplates] = useState([]);
@@ -12,9 +13,16 @@ const Aside = ({ sidebar, setValue }) => {
     const handleGetTemplate = async () => {
       try {
         setloading(true);
+        const query = [
+          Query.equal(
+            "user",
+            `${user?.email?.slice(0, user.email?.indexOf("@"))}`
+          ),
+        ];
         const getData = await database.listDocuments(
           "63eb228016758764c7f1",
-          "63eb2297eb0ff8f8cc79"
+          "63eb2297eb0ff8f8cc79",
+          query
         );
         settemplates(getData.documents);
         setloading(false);
@@ -24,6 +32,7 @@ const Aside = ({ sidebar, setValue }) => {
     };
     handleGetTemplate();
   }, []);
+  console.log(templates);
   const template = [1, 2, 3, 4];
   if (sidebar) {
     return (
@@ -41,28 +50,31 @@ const Aside = ({ sidebar, setValue }) => {
             })}
 
             <p className=" text-xl font-bold mt-8 mb-6">Your Tamplates</p>
-            {templates.map((value) => {
-              return (
-                <>
-                  {user ? (
-                    <>
-                      <div
-                        key={value?.$id}
-                        onClick={() => setValue(value["readme-template"])}
-                        className=" flex items-center bg-light dark:bg-dark py-2 px-3 rounded-lg my-4 overflow-hidden whitespace-nowrap cursor-pointer"
-                      >
-                        <BiFile className=" text-xl" />{" "}
-                        <p className=" ml-2 text-lg">{value?.title}</p>
-                      </div>
-                    </>
-                  ) : (
-                    <Link to="/signup">Create Account</Link>
-                  )}
-                </>
-              );
-            })}
-            {loading && (
-              <BiLoaderCircle className=" text-2xl animate-spin mx-auto my-8" />
+
+            {user ? (
+              <>
+                {templates.length != 0 ? (
+                  <>
+                    {templates?.map((value) => {
+                      return (
+                        <div
+                          key={value?.$id}
+                          onClick={() => setValue(value["readme-template"])}
+                          className=" flex items-center bg-light dark:bg-dark py-2 px-3 rounded-lg my-4 overflow-hidden whitespace-nowrap cursor-pointer"
+                        >
+                          <BiFile className=" text-xl" />{" "}
+                          <p className=" ml-2 text-lg">{value?.title}</p>
+                        </div>
+                      );
+                    })}
+                    <Loading load={loading} style="text-2xl my-8" />
+                  </>
+                ) : (
+                  <p className=" mt-5 text-sm">Empaty Templates</p>
+                )}
+              </>
+            ) : (
+              <Link to="/signup">Create Account</Link>
             )}
           </section>
           <button className=" flex items-center justify-center font-semibold w-full py-2 rounded-lg bg-light dark:bg-dark hover:bg-primary dark:hover:bg-primary duration-500">
