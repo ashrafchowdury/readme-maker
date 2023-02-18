@@ -32,7 +32,6 @@ const Aside = ({ sidebar, setValue }) => {
     };
     handleGetTemplate();
   }, []);
-  console.log(templates);
   const template = [1, 2, 3, 4];
   if (sidebar) {
     return (

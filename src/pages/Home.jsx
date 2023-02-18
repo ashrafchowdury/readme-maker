@@ -21,7 +21,6 @@ import { useUser } from "../utils/hooks/userInfo";
 
 const Home = () => {
   const { user } = useUser();
-  // console.log(user);
   return (
     <>
       <Navbar />

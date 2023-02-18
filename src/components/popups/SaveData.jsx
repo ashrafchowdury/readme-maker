@@ -23,7 +23,7 @@ const SaveData = ({ setsave, value }) => {
             "readme-template": value, // attribute and value
             title: title,
             description: desc,
-            user: `${user?.email?.slice(0, user.email?.indexOf("@"))}`,
+            user: `${user?.name}`,
           }
         );
         toast.success("Save data successfully 👍");

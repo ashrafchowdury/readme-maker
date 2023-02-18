@@ -10,15 +10,13 @@ import { FaGithub } from "react-icons/fa";
 import Icons from "../utils/Icons";
 import { useLocation, Link } from "react-router-dom";
 import { useUser } from "../../utils/hooks/userInfo";
-import { account } from "../../appwrite/appwriteConfig";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-hot-toast";
 
 const Navbar = ({ setsidebar }) => {
   const [theme, settheme] = useState("dark");
   const [open, setOpen] = useState(false);
   const location = useLocation();
-  const { user, setuser } = useUser();
+  const { user, setuser, logout } = useUser();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -65,17 +63,7 @@ const Navbar = ({ setsidebar }) => {
     settheme("light");
   };
 
-  const handleLogout = async () => {
-    try {
-      await account.deleteSession("current");
-      setuser(null);
-      toast.success("Logout successfully 🤝");
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-      toast.error("Something was wrong!");
-    }
-  };
+
   return (
     <nav className=" w-full h-[100px] flex justify-between items-center">
       <Link to="/">
@@ -113,7 +101,7 @@ const Navbar = ({ setsidebar }) => {
               onClick={() => setOpen(!open)}
               className="flex items-center justify-center py-2 px-6 rounded-lg font-bold bg-primary text-lightBg"
             >
-              <span>{user?.email?.slice(0, user.email?.indexOf("@"))}</span>
+              <span>{user?.name}</span>
               <BiChevronDown className=" text-2xl ml-3" />
             </button>
             {open && (
@@ -133,7 +121,7 @@ const Navbar = ({ setsidebar }) => {
                   </Link>
                   <button
                     className="px-4 py-2 text-start font-semibold hover:bg-lightBg hover:dark:bg-darkBg rounded-lg duration-300"
-                    onClick={handleLogout}
+                    onClick={() => logout()}
                   >
                     Log Out
                   </button>
