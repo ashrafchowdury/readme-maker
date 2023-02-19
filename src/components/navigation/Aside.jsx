@@ -5,6 +5,7 @@ import { useUser } from "../../utils/hooks/userInfo";
 import { database } from "../../appwrite/appwriteConfig";
 import { Query } from "appwrite";
 import Loading from "../utils/Loading";
+import { toast } from "react-hot-toast";
 const Aside = ({ sidebar, setValue }) => {
   const { user } = useUser();
   const [templates, settemplates] = useState([]);
@@ -27,6 +28,7 @@ const Aside = ({ sidebar, setValue }) => {
         settemplates(getData.documents);
         setloading(false);
       } catch (error) {
+        toast.error("Failed to fetch templates");
         console.log(error);
       }
     };

@@ -82,6 +82,7 @@ const TextEditor = ({ value, setValue }) => {
     size: 18,
     text: "Press / for open the selectors",
   });
+  const [dataSaveIcon, setDataSaveIcon] = useState(true);
   const editor = useRef(null);
 
   useEffect(() => {
@@ -90,6 +91,8 @@ const TextEditor = ({ value, setValue }) => {
         return false;
       }
     };
+    const LS_data = localStorage.getItem("template");
+    setValue(LS_data);
   }, []);
 
   //modules
@@ -111,6 +114,7 @@ const TextEditor = ({ value, setValue }) => {
   const handleSelection = () => {
     settextSelected(window.getSelection().toString());
   };
+
   const handleToolTip = () => {
     const quillEdior = editor.current.getEditor();
     const position = quillEdior.getBounds(quillEdior.getSelection()?.index);
@@ -129,6 +133,7 @@ const TextEditor = ({ value, setValue }) => {
       return null;
     }
   };
+
   const handlePlaceholder = (position, y, size, text) => {
     return setplaceholder({
       ...placeholder,
@@ -138,6 +143,7 @@ const TextEditor = ({ value, setValue }) => {
       text: text,
     });
   };
+
   const handleKey = (e) => {
     e.key == "Enter" && setisSelector(false);
     const quillEdior = editor.current.getEditor();
@@ -171,9 +177,23 @@ const TextEditor = ({ value, setValue }) => {
     }
   };
 
+  const handleSaveLocal = () => {
+    if (value.length > 20) {
+      setTimeout(() => {
+        setDataSaveIcon(true);
+        localStorage.setItem("template", value);
+      }, 10000);
+      setDataSaveIcon(false);
+    }
+  };
+
   return (
     <div className=" w-full">
-      <EditorMenu value={value} setValue={setValue} />
+      <EditorMenu
+        value={value}
+        setValue={setValue}
+        dataSaveIcon={dataSaveIcon}
+      />
       <div onMouseUp={handleSelection} className="relative">
         <CustomToolbar
           mouse={mousePositionForSelectors}
@@ -194,6 +214,7 @@ const TextEditor = ({ value, setValue }) => {
             className="editor"
             onChangeSelection={handleToolTip}
             onKeyUp={handleKey}
+            onKeyPress={handleSaveLocal}
           />
         </div>
         {placeholder.display && (
