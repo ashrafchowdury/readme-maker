@@ -13,10 +13,11 @@ import { downloadFile } from "../../utils/functions/download";
 import Icons from "../utils/Icons";
 import SaveData from "../popups/SaveData";
 import PrevData from "../popups/PrevData";
+import { useEditor } from "../../utils/hooks/useEditor";
 
-const EditorMenu = ({ value, setValue, dataSaveIcon }) => {
-  const [save, setsave] = useState(false);
-  const [prevPopup, setprevPopup] = useState(false);
+const EditorMenu = ({ dataSaveIcon }) => {
+  const { value, setValue, editor, seteditor } = useEditor();
+
   const handleCopy = () => {
     if (value.length > 20) {
       navigator.clipboard.writeText(value);
@@ -47,7 +48,10 @@ const EditorMenu = ({ value, setValue, dataSaveIcon }) => {
         </p>
 
         <div className=" flex items-center space-x-3">
-          <Icons content="Add Preveous Data" click={() => setprevPopup(true)}>
+          <Icons
+            content="Add Preveous Data"
+            click={() => seteditor({ ...editor, prevPopup: true })}
+          >
             <BiNotepad />
           </Icons>
           <Icons content="Copy Data" click={handleCopy}>
@@ -59,7 +63,10 @@ const EditorMenu = ({ value, setValue, dataSaveIcon }) => {
           >
             <BiDownload />
           </Icons>
-          <Icons content="Save File" click={() => setsave(true)}>
+          <Icons
+            content="Save File"
+            click={() => seteditor({ ...editor, save: true })}
+          >
             <BiSave />
           </Icons>
           <Icons content="Clear Data" click={handleClean}>
@@ -67,10 +74,8 @@ const EditorMenu = ({ value, setValue, dataSaveIcon }) => {
           </Icons>
         </div>
       </div>
-      {save && <SaveData setsave={setsave} value={value} />}
-      {prevPopup && (
-        <PrevData setprevPopup={setprevPopup} setValue={setValue} />
-      )}
+      {editor.save && <SaveData />}
+      {editor.prevPopup && <PrevData />}
     </>
   );
 };

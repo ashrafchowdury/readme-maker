@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { HiX } from "react-icons/hi";
+import { useEditor } from "../../utils/hooks/useEditor";
 
-const PrevData = ({ setprevPopup, setValue }) => {
+const PrevData = () => {
   const [data, setdata] = useState("");
+  const { setValue, editor, seteditor } = useEditor();
   return (
     <section className="popup">
       <div className=" w-[700px] bg-lightBg dark:bg-darkBg p-9 rounded-xl relative">
         <div className="w-full mb-9 flex justify-between items-center">
           <p className=" text-2xl font-medium ">Add Previous Data</p>
           <button
-            onClick={() => setprevPopup(false)}
+            onClick={() => seteditor({ ...editor, prevPopup: false })}
             className=" p-2 rounded-lg bg-primary"
           >
             <HiX className=" text-xl" />
@@ -28,7 +30,7 @@ const PrevData = ({ setprevPopup, setValue }) => {
           className="w-full bg-primary text-white font-semibold rounded-lg px-4 py-3 mt-9"
           onClick={() => {
             setValue(data);
-            setprevPopup(false);
+            seteditor({ ...editor, prevPopup: false });
           }}
         >
           Add Data

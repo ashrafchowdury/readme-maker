@@ -6,6 +6,7 @@ import { useUser } from "../utils/hooks/userInfo";
 const Profile = () => {
   const { user, setuser, logout } = useUser();
   const [name, setname] = useState("");
+  
   const handleChange = async () => {
     if (!name) {
       toast.error("Pleace Fillup all the fileds");

@@ -4,10 +4,12 @@ import { HiX } from "react-icons/hi";
 import { toast } from "react-hot-toast";
 import { v4 as uuidv4 } from "uuid";
 import { useUser } from "../../utils/hooks/userInfo";
+import { useEditor } from "../../utils/hooks/useEditor";
 
-const SaveData = ({ setsave, value }) => {
+const SaveData = () => {
   const [title, settitle] = useState("");
   const [desc, setdesc] = useState("");
+  const { value, editor, seteditor } = useEditor();
   const { user } = useUser();
 
   const handleSave = async () => {
@@ -27,7 +29,7 @@ const SaveData = ({ setsave, value }) => {
           }
         );
         toast.success("Save data successfully 👍");
-        setsave(false);
+        seteditor({ ...editor, save: false });
       } catch (error) {
         console.log(error);
         toast.error("Something was wrong! 🤷‍♀️");
@@ -40,7 +42,7 @@ const SaveData = ({ setsave, value }) => {
         <div className="w-full mb-9 flex justify-between items-center">
           <p className=" text-2xl font-medium ">Save the Template</p>
           <button
-            onClick={() => setsave(false)}
+            onClick={() => seteditor({ ...editor, save: false })}
             className=" p-2 rounded-lg bg-primary"
           >
             <HiX className=" text-xl" />

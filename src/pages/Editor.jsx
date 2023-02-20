@@ -4,14 +4,12 @@ import Aside from "../components/navigation/Aside";
 import TextEditor from "../components/editor/TextEditor";
 
 const Editor = () => {
-  const [value, setValue] = useState("");
-  const [sidebar, setsidebar] = useState(true);
   return (
     <>
-      <Navbar setsidebar={setsidebar} />
+      <Navbar />
       <section className=" flex justify-between">
-        <TextEditor value={value} setValue={setValue} />
-        <Aside sidebar={sidebar} setValue={setValue} />
+        <TextEditor />
+        <Aside />
       </section>
     </>
   );

@@ -2,6 +2,7 @@ import { useState, useEffect, createContext, useContext } from "react";
 import { toast } from "react-hot-toast";
 import { account } from "../../appwrite/appwriteConfig";
 import { useNavigate } from "react-router-dom";
+
 export const UserContext = createContext();
 export const useUser = () => useContext(UserContext);
 

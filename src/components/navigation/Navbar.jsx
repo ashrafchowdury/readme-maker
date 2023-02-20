@@ -1,21 +1,17 @@
 import { useState, useEffect } from "react";
-import {
-  BiSun,
-  BiMoon,
-  BiQuestionMark,
-  BiSidebar,
-  BiChevronDown,
-} from "react-icons/bi";
+import { BiSun, BiMoon, BiSidebar, BiChevronDown } from "react-icons/bi";
 import { FaGithub } from "react-icons/fa";
 import Icons from "../utils/Icons";
 import { useLocation, Link } from "react-router-dom";
 import { useUser } from "../../utils/hooks/userInfo";
 import { useNavigate } from "react-router-dom";
+import { useEditor } from "../../utils/hooks/useEditor";
 
 const Navbar = ({ setsidebar }) => {
   const [theme, settheme] = useState("dark");
   const [open, setOpen] = useState(false);
   const location = useLocation();
+  const { editor, seteditor } = useEditor();
   const { user, setuser, logout } = useUser();
   const navigate = useNavigate();
 
@@ -63,7 +59,6 @@ const Navbar = ({ setsidebar }) => {
     settheme("light");
   };
 
-
   return (
     <nav className=" w-full h-[100px] flex justify-between items-center">
       <Link to="/">
@@ -73,7 +68,12 @@ const Navbar = ({ setsidebar }) => {
       <div className="navIcons flex items-center space-x-3">
         {location.pathname == "/editor" ? (
           <Icons
-            click={() => setsidebar((prev) => (prev == true ? false : true))}
+            click={() =>
+              seteditor({
+                ...editor,
+                sidebar: editor.sidebar == true ? false : true,
+              })
+            }
             style="w-9 h-9 flex justify-center items-center rounded-lg bg-light dark:bg-dark ring-light dark:ring-dark focus:ring-2 text-xl duration-500"
             content="SideBar"
           >

@@ -1,55 +1,14 @@
-import { useState, useEffect } from "react";
 import Navbar from "../components/navigation/Navbar";
 import { Link, useNavigate } from "react-router-dom";
-import { Query } from "appwrite";
 import { useUser } from "../utils/hooks/userInfo";
-import { database } from "../appwrite/appwriteConfig";
 import Loading from "../components/utils/Loading";
 import { BiTrash } from "react-icons/bi";
-import { toast } from "react-hot-toast";
+import { useTemplate } from "../utils/hooks/useTemplate";
 
 const Tamplates = () => {
   const { user } = useUser();
-  const [templates, settemplates] = useState([]);
-  const [loading, setloading] = useState(false);
+  const { templates, loading, deleteTemplate } = useTemplate(user);
   const navigate = useNavigate();
-  useEffect(() => {
-    const handleGetTemplate = async () => {
-      try {
-        setloading(true);
-        const query = [
-          Query.equal(
-            "user",
-            `${user?.email?.slice(0, user.email?.indexOf("@"))}`
-          ),
-        ];
-        const getData = await database.listDocuments(
-          "63eb228016758764c7f1",
-          "63eb2297eb0ff8f8cc79",
-          query
-        );
-        settemplates(getData.documents);
-        setloading(false);
-      } catch (error) {
-        toast.error("Failed to fetch templates");
-        console.log(error);
-      }
-    };
-    handleGetTemplate();
-  }, []);
-  const handleDelete = async (docId) => {
-    try {
-      await database.deleteDocument(
-        "63eb228016758764c7f1",
-        "63eb2297eb0ff8f8cc79",
-        docId
-      );
-      toast.success("Template deleted successfully");
-    } catch (error) {
-      toast.error("Something was wrong!");
-      console.log(error);
-    }
-  };
   const handleTeleport = () => {
     navigate("/editor");
   };
@@ -95,7 +54,7 @@ const Tamplates = () => {
                       >
                         <button
                           className=" p-[6px] rounded-lg bg-lightBg dark:bg-darkBg absolute top-3 right-3 hover:bg-red-500 dark:hover:bg-red-500 duration-500"
-                          onClick={() => handleDelete(value?.$id)}
+                          onClick={() => deleteTemplate(value?.$id)}
                         >
                           <BiTrash className="text-[16px]" />
                         </button>

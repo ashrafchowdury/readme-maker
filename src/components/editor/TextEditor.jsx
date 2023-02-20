@@ -10,6 +10,7 @@ import {
   iconHandler,
 } from "../../utils/functions/quill-functions";
 import ImageResize from "quill-image-resize-module-react";
+import { useEditor } from "../../utils/hooks/useEditor";
 
 let icons = Quill.import("ui/icons");
 icons["header"][1] = null;
@@ -67,7 +68,7 @@ const CustomToolbar = ({
   );
 };
 
-const TextEditor = ({ value, setValue }) => {
+const TextEditor = () => {
   const [textSelected, settextSelected] = useState("");
   const [selectIcons, setselectIcons] = useState(false);
   const [isSelector, setisSelector] = useState(false);
@@ -83,6 +84,7 @@ const TextEditor = ({ value, setValue }) => {
     text: "Press / for open the selectors",
   });
   const [dataSaveIcon, setDataSaveIcon] = useState(true);
+  const { value, setValue } = useEditor();
   const editor = useRef(null);
 
   useEffect(() => {
@@ -189,11 +191,7 @@ const TextEditor = ({ value, setValue }) => {
 
   return (
     <div className=" w-full">
-      <EditorMenu
-        value={value}
-        setValue={setValue}
-        dataSaveIcon={dataSaveIcon}
-      />
+      <EditorMenu dataSaveIcon={dataSaveIcon} />
       <div onMouseUp={handleSelection} className="relative">
         <CustomToolbar
           mouse={mousePositionForSelectors}
