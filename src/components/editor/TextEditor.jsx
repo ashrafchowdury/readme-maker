@@ -9,8 +9,10 @@ import {
   dividerInsert,
   iconHandler,
 } from "../../utils/functions/quill-functions";
-import ImageResize from "quill-image-resize-module-react";
 import { useEditor } from "../../utils/hooks/useEditor";
+import ResizeModule from "@botom/quill-resize-module";
+Quill.register("modules/resize", ResizeModule);
+
 
 let icons = Quill.import("ui/icons");
 icons["header"][1] = null;
@@ -36,8 +38,8 @@ Hr.tagName = "hr";
 Quill.register({
   "formats/hr": Hr,
 });
-Quill.register({ "modules/imageResize": ImageResize });
 
+//
 const CustomToolbar = ({
   mouse,
   inline,
@@ -107,9 +109,16 @@ const TextEditor = () => {
         iconHandler: iconHandler,
       },
     },
-    imageResize: {
-      parchment: Quill.import("parchment"),
-      modules: ["Resize", "DisplaySize"],
+    clipboard: {
+      // toggle to add extra line breaks when pasting HTML:
+      matchVisual: false,
+    },
+    resize: {
+      locale: {
+        floatLeft: "Left",
+        floatRight: "Right",
+        center: "Center",
+      },
     },
   };
   // handle inline selection component
