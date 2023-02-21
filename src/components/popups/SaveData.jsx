@@ -25,7 +25,7 @@ const SaveData = () => {
             "readme-template": value, // attribute and value
             title: title,
             description: desc,
-            user: `${user?.name}`,
+            user: `${user?.$id}`,
           }
         );
         toast.success("Save data successfully 👍");

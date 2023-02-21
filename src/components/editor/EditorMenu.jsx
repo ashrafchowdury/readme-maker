@@ -65,7 +65,9 @@ const EditorMenu = ({ dataSaveIcon }) => {
           </Icons>
           <Icons
             content="Save File"
-            click={() => seteditor({ ...editor, save: true })}
+            click={() =>
+              value.length > 12 && seteditor({ ...editor, save: true })
+            }
           >
             <BiSave />
           </Icons>

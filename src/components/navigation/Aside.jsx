@@ -7,13 +7,13 @@ import { useTemplate } from "../../utils/hooks/useTemplate";
 
 const Aside = () => {
   const { user } = useUser();
-  const { value, setValue, editor } = useEditor();
+  const { value, setValue, editor, seteditor } = useEditor();
   const { templates, loading } = useTemplate(user);
 
   const handleClean = () => {
     if (value.length > 12) {
       const conformation = window.confirm("Save Template");
-      conformation && setValue("");
+      conformation && seteditor({ ...editor, save: true });
     }
   };
   const template = [1, 2, 3, 4];
