@@ -66,18 +66,26 @@
   .editor .ql-editor h2 {
     @apply !text-2xl py-3 border-b border-dark;
   }
-  .editor .ql-tooltip {
+  .editor .ql-editor h3 {
+    @apply !text-[22px] py-2;
+  }
+  .editor .tooltipLink {
     @apply bg-light dark:bg-dark text-darkBg dark:text-lightBg !border-none !shadow-none !py-3 !px-6 rounded-lg !left-6;
   }
-  .editor .ql-tooltip input {
+  .editor .tooltipLink input {
     @apply !w-[250px] bg-lightBg dark:bg-darkBg text-darkBg dark:text-lightBg rounded-lg !py-5 !px-3 !border-none outline-none;
   }
-  .editor .ql-tooltip .ql-action {
+  .editor .tooltipLink .ql-action {
     @apply bg-primary text-lightBg py-[8.5px] px-3 rounded-lg ml-2;
   }
-  .editor .ql-tooltip .ql-action::after {
+  .editor .tooltipLink .ql-action::after {
     @apply !m-0;
   }
+/**/
+.editor .tooltipImage {
+  @apply w-[95%] bg-light dark:bg-dark text-darkBg dark:text-lightBg !border-none !shadow-none !py-5 !px-6 rounded-lg !left-5 flex flex-col items-center justify-center space-y-3;
+}
+
   .popup {
     background: linear-gradient(
       244.43deg,
@@ -89,5 +97,10 @@
   .popup {
     @apply absolute top-0 left-0 right-0 bottom-0 z-50 flex justify-center items-center;
   }
+  /* .editor .ql-tooltip {
+    @apply !border-2 !border-red-600
+  } */
 }
-
+.editor div.ql-tooltip.tooltipImage.ql-editing::before{
+  content: 'Add Image Url'!;
+}

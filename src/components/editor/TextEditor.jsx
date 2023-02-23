@@ -124,6 +124,7 @@ const TextEditor = () => {
 
   const handleKey = (e) => {
     e.key == "Enter" && setisSelector(false);
+    e.key == "Enter" && setIsKeyEnabled(false);
     const quillEdior = editor.current.getEditor();
     const position = quillEdior.getBounds(quillEdior.getSelection()?.index);
 
@@ -172,7 +173,7 @@ const TextEditor = () => {
 
   const handleEditorChange = (content, delta, source, editor) => {
     setValue(content);
-    setIsKeyEnabled(editor.getText().length > 1);
+    setIsKeyEnabled(window.getSelection()?.anchorNode.data.length > 1);
   };
   return (
     <div className=" w-full">

@@ -2,6 +2,9 @@ export function imageHandler() {
   const tooltip = this.quill.theme.tooltip;
   const originalSave = tooltip.save;
   const originalHide = tooltip.hide;
+  const div = document.querySelector(".ql-tooltip");
+  div.classList.remove("tooltipLink");
+  div.classList.add("tooltipImage");
 
   tooltip.save = function () {
     const range = this.quill.getSelection(true);
@@ -15,10 +18,12 @@ export function imageHandler() {
     tooltip.save = originalSave;
     tooltip.hide = originalHide;
     tooltip.hide();
+    div.classList.remove("tooltipImage");
   };
   tooltip.edit("image");
   tooltip.textbox.placeholder = "Embed URL";
 }
+
 export function iconHandler() {
   const tooltip = this.quill.theme.tooltip;
   const originalSave = tooltip.save;
