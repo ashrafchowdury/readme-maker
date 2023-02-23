@@ -10,36 +10,8 @@ import {
   iconHandler,
 } from "../../utils/functions/quill-functions";
 import { useEditor } from "../../utils/hooks/useEditor";
-import ResizeModule from "@botom/quill-resize-module";
-Quill.register("modules/resize", ResizeModule);
+import "./CustomIcons_Selectors";
 
-
-let icons = Quill.import("ui/icons");
-icons["header"][1] = null;
-icons["header"][2] = null;
-icons["list"]["bullet"] = null;
-icons["list"]["ordered"] = null;
-icons["link"] = null;
-icons["code-block"] = null;
-icons["image"] = null;
-icons["video"] = null;
-icons["bold"] = null;
-icons["code"] = null;
-icons["italic"] = null;
-let Embed = Quill.import("blots/block/embed");
-class Hr extends Embed {
-  static create(value) {
-    let node = super.create(value);
-    return node;
-  }
-}
-Hr.blotName = "hr";
-Hr.tagName = "hr";
-Quill.register({
-  "formats/hr": Hr,
-});
-
-//
 const CustomToolbar = ({
   mouse,
   inline,
@@ -86,18 +58,12 @@ const TextEditor = () => {
     text: "Press / for open the selectors",
   });
   const [dataSaveIcon, setDataSaveIcon] = useState(true);
+  const [isKeyEnabled, setIsKeyEnabled] = useState(false);
   const { value, setValue } = useEditor();
   const editor = useRef(null);
 
-  useEffect(() => {
-    window.onkeypress = (e) => {
-      if (e.key == "/") {
-        return false;
-      }
-    };
-    const LS_data = localStorage.getItem("template");
-    setValue(LS_data);
-  }, []);
+  //   // const LS_data = localStorage.getItem("template");
+  //   // setValue(LS_data);
 
   //modules
   const modules = {
@@ -121,6 +87,7 @@ const TextEditor = () => {
       },
     },
   };
+
   // handle inline selection component
   const handleSelection = () => {
     settextSelected(window.getSelection().toString());
@@ -161,13 +128,12 @@ const TextEditor = () => {
     const position = quillEdior.getBounds(quillEdior.getSelection()?.index);
 
     // this condition for opne & close the selectors
-    if (e.key == "/") {
+    if (e.key == "/" && window.getSelection()?.anchorNode.data == undefined) {
       setisSelector(true);
       setmousePositionForSelectors({
         x: position.left,
         y: position.top,
       });
-      return false;
     } else {
       setisSelector(false);
     }
@@ -188,8 +154,8 @@ const TextEditor = () => {
     }
   };
 
-  const handleSaveLocal = () => {
-    if (value.length > 20) {
+  const handleSaveLocal = (e) => {
+    if (window.getSelection()?.anchorNode.data.length > 10) {
       setTimeout(() => {
         setDataSaveIcon(true);
         localStorage.setItem("template", value);
@@ -198,6 +164,16 @@ const TextEditor = () => {
     }
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key == "/" && !isKeyEnabled) {
+      event.preventDefault();
+    }
+  };
+
+  const handleEditorChange = (content, delta, source, editor) => {
+    setValue(content);
+    setIsKeyEnabled(editor.getText().length > 1);
+  };
   return (
     <div className=" w-full">
       <EditorMenu dataSaveIcon={dataSaveIcon} />
@@ -216,12 +192,13 @@ const TextEditor = () => {
             ref={editor}
             theme="snow"
             value={value}
-            onChange={setValue}
+            onChange={handleEditorChange}
             modules={modules}
             className="editor"
             onChangeSelection={handleToolTip}
             onKeyUp={handleKey}
             onKeyPress={handleSaveLocal}
+            onKeyDown={handleKeyDown}
           />
         </div>
         {placeholder.display && (
