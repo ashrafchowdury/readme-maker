@@ -78,13 +78,19 @@
   .editor .tooltipLink .ql-action {
     @apply bg-primary text-lightBg py-[8.5px] px-3 rounded-lg ml-2;
   }
-  .editor .tooltipLink .ql-action::after {
+  .editor .ql-tooltip .ql-action::after {
     @apply !m-0;
   }
-/**/
-.editor .tooltipImage {
-  @apply w-[95%] bg-light dark:bg-dark text-darkBg dark:text-lightBg !border-none !shadow-none !py-5 !px-6 rounded-lg !left-5 flex flex-col items-center justify-center space-y-3;
-}
+  /**/
+  .editor .tooltipImage {
+    @apply w-[90%] bg-light dark:bg-dark text-darkBg dark:text-lightBg !border-none !shadow-none !py-5 !px-6 rounded-lg !left-[50%] !translate-x-[-50%] flex flex-col items-center justify-center space-y-4;
+  }
+  .editor .tooltipImage input {
+    @apply !w-[90%] bg-lightBg dark:bg-darkBg text-darkBg dark:text-lightBg rounded-lg !py-6 !px-4 !border-none outline-none !text-lg;
+  }
+  .editor .tooltipImage .ql-action {
+    @apply bg-primary text-lightBg py-[6px] px-12 rounded-lg ml-2 font-bold uppercase;
+  }
 
   .popup {
     background: linear-gradient(
@@ -101,6 +107,6 @@
     @apply !border-2 !border-red-600
   } */
 }
-.editor div.ql-tooltip.tooltipImage.ql-editing::before{
-  content: 'Add Image Url'!;
+.editor div.ql-tooltip.tooltipImage.ql-editing::before {
+  content: "Add Image Url" !;
 }

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import ReactQuill, { Quill } from "react-quill";
+import { GrammarlyEditorPlugin } from "@grammarly/editor-sdk-react";
 import "react-quill/dist/quill.snow.css";
 import Selector from "./Selector";
 import InlineSelector from "./InlineSelector";
@@ -11,6 +12,8 @@ import {
 } from "../../utils/functions/quill-functions";
 import { useEditor } from "../../utils/hooks/useEditor";
 import "./CustomIcons_Selectors";
+import InputTag from "./InputTag";
+import MyComponent from "./Experiment";
 
 const CustomToolbar = ({
   mouse,
@@ -24,7 +27,7 @@ const CustomToolbar = ({
   return (
     <div
       id="toolbar"
-      className={` absolute !z-20 !border-none`}
+      className={`custom absolute !z-20 !border-none`}
       style={{
         top: `${mouse.y}px`,
         left: `${mouse.x}px`,
@@ -61,9 +64,6 @@ const TextEditor = () => {
   const [isKeyEnabled, setIsKeyEnabled] = useState(false);
   const { value, setValue } = useEditor();
   const editor = useRef(null);
-
-  //   // const LS_data = localStorage.getItem("template");
-  //   // setValue(LS_data);
 
   //modules
   const modules = {
@@ -128,12 +128,23 @@ const TextEditor = () => {
     const quillEdior = editor.current.getEditor();
     const position = quillEdior.getBounds(quillEdior.getSelection()?.index);
 
+    const windowHeight = document.documentElement.clientHeight;
+
+    // Get the position and height of the div
+    const divRect = document
+      .querySelector(".placeholder")
+      .getBoundingClientRect();
+
+    const bottomSpace = windowHeight - divRect.top - divRect.height; // Calculate the space available from the bottom of the div
+
+    // console.log(`top: ${topSpace}, bottom: ${bottomSpace}`);
+
     // this condition for opne & close the selectors
     if (e.key == "/" && window.getSelection()?.anchorNode.data == undefined) {
       setisSelector(true);
       setmousePositionForSelectors({
         x: position.left,
-        y: position.top,
+        y: bottomSpace < 300 ? position.top - 360 : position.top,
       });
     } else {
       setisSelector(false);
@@ -188,23 +199,26 @@ const TextEditor = () => {
           placeholder={placeholder}
           setplaceholder={setplaceholder}
         />
-        <div onClick={handleKey}>
-          <ReactQuill
-            ref={editor}
-            theme="snow"
-            value={value}
-            onChange={handleEditorChange}
-            modules={modules}
-            className="editor"
-            onChangeSelection={handleToolTip}
-            onKeyUp={handleKey}
-            onKeyPress={handleSaveLocal}
-            onKeyDown={handleKeyDown}
-          />
-        </div>
+        <GrammarlyEditorPlugin clientId="client_CWguQMGT3AtvUQw7vdoKNk">
+          <div onClick={handleKey}>
+            <ReactQuill
+              ref={editor}
+              theme="snow"
+              value={value}
+              onChange={handleEditorChange}
+              modules={modules}
+              className="editor"
+              onChangeSelection={handleToolTip}
+              onKeyUp={handleKey}
+              onKeyPress={handleSaveLocal}
+              onKeyDown={handleKeyDown}
+              disableAutoformat={true}
+            />
+          </div>
+        </GrammarlyEditorPlugin>
         {placeholder.display && (
           <div
-            className={` absolute z-10 text-lg select-none`}
+            className={`placeholder absolute z-10 text-lg select-none`}
             style={{
               top: placeholder.y,
               left: placeholder.x,
@@ -215,8 +229,12 @@ const TextEditor = () => {
           </div>
         )}
       </div>
+      {/* <InputTag /> */}
+      {/* <MyComponent /> */}
     </div>
   );
 };
 
 export default TextEditor;
+
+

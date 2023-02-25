@@ -12,7 +12,7 @@ import UserDataProvider from "./utils/hooks/userInfo";
 import EditorDataProvider from "./utils/hooks/useEditor";
 function App() {
   return (
-    <main className=" w-[90%] sm:w-[550px] md:w-[767px] lg:w-[1023px] xl:w-[1400px] mx-auto">
+    <main className="mainContiner w-[90%] sm:w-[550px] md:w-[767px] lg:w-[1023px] xl:w-[1400px] mx-auto">
       <TooltipProvider>
         <UserDataProvider>
           <EditorDataProvider>
