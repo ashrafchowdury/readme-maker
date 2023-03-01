@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import ReactQuill, { Quill } from "react-quill";
-import { GrammarlyEditorPlugin } from "@grammarly/editor-sdk-react";
+// import { GrammarlyEditorPlugin } from "@grammarly/editor-sdk-react";
 import "react-quill/dist/quill.snow.css";
 import Selector from "./Selector";
 import InlineSelector from "./InlineSelector";
@@ -89,26 +89,22 @@ const TextEditor = () => {
   };
 
   // handle inline selection component
-  const handleSelection = () => {
+  const handleToolTip = (range, source, editor) => {
     settextSelected(window.getSelection().toString());
-  };
 
-  const handleToolTip = () => {
-    const quillEdior = editor.current.getEditor();
-    const position = quillEdior.getBounds(quillEdior.getSelection()?.index);
+    const quillEdior = editor.current?.getEditor();
+    const position = quillEdior?.getBounds(quillEdior.getSelection()?.index);
+
     if (window.getSelection()?.anchorNode.data == undefined) {
       setplaceholder({ ...placeholder, display: true });
     } else {
       setplaceholder({ ...placeholder, display: false });
     }
-
-    if (textSelected != "") {
+    if (textSelected != " " || textSelected != "") {
       setmousePositionForSelectors({
         x: position.left - 80,
         y: position.top - 60,
       });
-    } else {
-      return null;
     }
   };
 
@@ -133,11 +129,9 @@ const TextEditor = () => {
     // Get the position and height of the div
     const divRect = document
       .querySelector(".placeholder")
-      .getBoundingClientRect();
+      ?.getBoundingClientRect();
 
-    const bottomSpace = windowHeight - divRect.top - divRect.height; // Calculate the space available from the bottom of the div
-
-    // console.log(`top: ${topSpace}, bottom: ${bottomSpace}`);
+    const bottomSpace = windowHeight - divRect?.top - divRect?.height; // Calculate the space available from the bottom of the div
 
     // this condition for opne & close the selectors
     if (e.key == "/" && window.getSelection()?.anchorNode.data == undefined) {
@@ -157,7 +151,9 @@ const TextEditor = () => {
       handlePlaceholder(position, 10, 30, "Heading 1");
     } else if (tagName == "h2") {
       handlePlaceholder(position, 6, 24, "Heading 2");
-    } else if (window.getSelection()?.baseNode?.firstChild.localName == "img") {
+    } else if (
+      window.getSelection()?.baseNode?.firstChild?.localName == "img"
+    ) {
       setplaceholder({ ...placeholder, display: false });
     } else if (tagName == "p" || tagName == "div") {
       handlePlaceholder(position, 0, 18, "Press / for open the selectors");
@@ -167,7 +163,7 @@ const TextEditor = () => {
   };
 
   const handleSaveLocal = (e) => {
-    if (window.getSelection()?.anchorNode.data.length > 10) {
+    if (window.getSelection()?.anchorNode?.data?.length > 10) {
       setTimeout(() => {
         setDataSaveIcon(true);
         localStorage.setItem("template", value);
@@ -184,12 +180,12 @@ const TextEditor = () => {
 
   const handleEditorChange = (content, delta, source, editor) => {
     setValue(content);
-    setIsKeyEnabled(window.getSelection()?.anchorNode.data.length > 1);
+    setIsKeyEnabled(window.getSelection()?.anchorNode?.data?.length > 1);
   };
   return (
     <div className=" w-full">
       <EditorMenu dataSaveIcon={dataSaveIcon} />
-      <div onMouseUp={handleSelection} className="relative">
+      <div className="relative">
         <CustomToolbar
           mouse={mousePositionForSelectors}
           inline={textSelected ? "" : "hidden"}
@@ -199,23 +195,22 @@ const TextEditor = () => {
           placeholder={placeholder}
           setplaceholder={setplaceholder}
         />
-        <GrammarlyEditorPlugin clientId="client_CWguQMGT3AtvUQw7vdoKNk">
-          <div onClick={handleKey}>
-            <ReactQuill
-              ref={editor}
-              theme="snow"
-              value={value}
-              onChange={handleEditorChange}
-              modules={modules}
-              className="editor"
-              onChangeSelection={handleToolTip}
-              onKeyUp={handleKey}
-              onKeyPress={handleSaveLocal}
-              onKeyDown={handleKeyDown}
-              disableAutoformat={true}
-            />
-          </div>
-        </GrammarlyEditorPlugin>
+        {/* <GrammarlyEditorPlugin clientId="client_CWguQMGT3AtvUQw7vdoKNk"> */}
+        <div onClick={handleKey}>
+          <ReactQuill
+            ref={editor}
+            theme="snow"
+            value={value}
+            onChange={handleEditorChange}
+            modules={modules}
+            className="editor"
+            onChangeSelection={handleToolTip}
+            onKeyUp={handleKey}
+            onKeyPress={handleSaveLocal}
+            onKeyDown={handleKeyDown}
+          />
+        </div>
+        {/* </GrammarlyEditorPlugin> */}
         {placeholder.display && (
           <div
             className={`placeholder absolute z-10 text-lg select-none`}
@@ -236,5 +231,3 @@ const TextEditor = () => {
 };
 
 export default TextEditor;
-
-

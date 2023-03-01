@@ -22,12 +22,6 @@ const Selector = ({
 }) => {
   const selectors = [
     {
-      styleName: "",
-      icon: <GoTextSize className=" !text-2xl" />,
-      title: "Text",
-      des: "Start Writing With Plain Text",
-    },
-    {
       styleName: "ql-header",
       icon: <FaHeading className=" !text-2xl" />,
       title: "Heading 1",
