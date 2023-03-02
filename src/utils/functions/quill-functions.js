@@ -34,14 +34,17 @@ export function iconHandler() {
 
   tooltip.save = function () {
     const range = this.quill.getSelection(true);
-    let value = this.textbox.value;
-    if (value) {
-      this.quill.insertEmbed(
-        range.index,
-        "image",
-        `https://skillicons.dev/icons?i=${value}`,
-        "user"
-      );
+    let iconName = this.textbox.value;
+    const icons = iconName.split(",");
+    if (icons) {
+      icons?.reverse().map((value) => {
+        this.quill.insertEmbed(
+          range.index,
+          "image",
+          `https://skillicons.dev/icons?i=${value}`,
+          "user"
+        );
+      });
     }
   };
   tooltip.hide = function () {

@@ -18,12 +18,20 @@ import { useEditor } from "../../utils/hooks/useEditor";
 const EditorMenu = ({ dataSaveIcon }) => {
   const { value, setValue, editor, seteditor } = useEditor();
 
-  const handleCopy = () => {
-    if (value.length > 20) {
-      navigator.clipboard.writeText(value);
-      toast.success("Text copied successfully 👍");
+  const handleCopy = async () => {
+    if (value?.includes('"></')) {
+      const images = document.querySelectorAll("img"); // select all images
+      images.forEach((image) => {
+        const space = document.createTextNode("\u00A0"); // create a text node with the Unicode value of &nbsp;
+        image.insertAdjacentHTML("afterend", space.textContent); // append the text node after the image
+      });
     } else {
-      toast.error("Pleace add enough text for copy");
+      if (value.length > 20) {
+        navigator.clipboard.writeText(value);
+        toast.success("Text copied successfully 👍");
+      } else {
+        toast.error("Pleace add enough text for copy");
+      }
     }
   };
   const handleClean = () => {

@@ -12,8 +12,6 @@ import {
 } from "../../utils/functions/quill-functions";
 import { useEditor } from "../../utils/hooks/useEditor";
 import "./CustomIcons_Selectors";
-import InputTag from "./InputTag";
-import MyComponent from "./Experiment";
 
 const CustomToolbar = ({
   mouse,
@@ -217,7 +215,7 @@ const TextEditor = () => {
         </GrammarlyEditorPlugin>
         {placeholder.display && (
           <div
-            className={`placeholder absolute z-10 text-lg select-none text-slate-600 dark:text-slate-500`}
+            className={`placeholder absolute z-10 text-lg select-none text-slate-600 dark:text-slate-500 duration-100`}
             style={{
               top: placeholder.y,
               left: placeholder.x,
@@ -228,8 +226,6 @@ const TextEditor = () => {
           </div>
         )}
       </div>
-      {/* <InputTag /> */}
-      {/* <MyComponent /> */}
     </div>
   );
 };

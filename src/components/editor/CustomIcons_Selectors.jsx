@@ -27,3 +27,17 @@ icons["video"] = null;
 icons["bold"] = null;
 icons["code"] = null;
 icons["italic"] = null;
+
+let Keyboard = Quill.import("modules/keyboard");
+
+class CustomKeyboard extends Keyboard {
+  static DEFAULTS = {
+    ...Keyboard.DEFAULTS,
+    bindings: {
+      ...Keyboard.DEFAULTS.bindings,
+      ["list autofill"]: undefined,
+    },
+  };
+}
+
+Quill.register("modules/keyboard", CustomKeyboard);
