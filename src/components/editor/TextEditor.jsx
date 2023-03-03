@@ -11,8 +11,7 @@ import {
   iconHandler,
 } from "../../utils/functions/quill-functions";
 import { useEditor } from "../../utils/hooks/useEditor";
-import "./CustomIcons_Selectors";
-
+import "./QuillConfig";
 const CustomToolbar = ({
   mouse,
   inline,
