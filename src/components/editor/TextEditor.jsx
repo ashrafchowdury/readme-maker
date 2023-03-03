@@ -88,11 +88,16 @@ const TextEditor = () => {
   // handle inline selection component
   const handleToolTip = () => {
     const quillEdior = editor.current?.getEditor();
+    // console.log(window.getSelection());
     const position = quillEdior?.getBounds(quillEdior.getSelection()?.index);
 
     if (window.getSelection()?.anchorNode.data == undefined) {
       setplaceholder({ ...placeholder, display: true });
-      settextSelected("");
+      if (window.getSelection()?.anchorNode.innerHTML?.includes("img")) {
+        settextSelected(window.getSelection()?.anchorNode.innerHTML);
+      } else {
+        settextSelected("");
+      }
     } else {
       setplaceholder({ ...placeholder, display: false });
       settextSelected(window.getSelection().toString());

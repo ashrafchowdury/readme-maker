@@ -7,7 +7,7 @@ import {
   BiListUl,
   BiHeading,
 } from "react-icons/bi";
-
+import { CiAlignRight, CiAlignCenterV, CiAlignLeft } from 'react-icons/ci'
 const InlineSelector = ({ condition }) => {
   const tooltipClass = document.querySelector(".ql-tooltip");
   const handleAddClass = () => {
@@ -16,7 +16,7 @@ const InlineSelector = ({ condition }) => {
   return (
     <section
       id="toolbar"
-      className={`inlineSelector ${condition} w-[320px] h-[40px] bg-light dark:bg-dark rounded-lg flex items-center justify-between py-2 px-3`}
+      className={`inlineSelector ${condition} w-[380px] h-[40px] bg-light dark:bg-dark rounded-lg flex items-center justify-between py-2 px-3`}
     >
       <button className="ql-header !flex" value="1">
         <BiHeading className=" !text-xl" />{" "}
@@ -39,10 +39,15 @@ const InlineSelector = ({ condition }) => {
       <button className="ql-italic">
         <BiItalic />
       </button>
-      <button class="ql-list" value="bullet">
-        <BiListUl />
+      <button class="ql-align" value="justify">
+      <CiAlignLeft />
       </button>
-
+      <button class="ql-align" value="center">
+      <CiAlignCenterV />
+      </button>
+      <button class="ql-align" value="right">
+      <CiAlignRight />
+      </button>
       <button className="ql-link" onClick={handleAddClass}>
         <BiUnlink />
       </button>

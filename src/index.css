@@ -44,9 +44,7 @@
   .editor img {
     @apply cursor-pointer;
   }
-  .editor p:has(img) {
-    @apply flex flex-wrap space-x-2 space-y-2;
-  }
+
   .editor .ql-editor.ql-blank::before {
     @apply text-lg text-light py-4 px-6 capitalize;
   }
@@ -90,6 +88,19 @@
   }
   .editor .tooltipImage .ql-action {
     @apply bg-primary text-lightBg py-[6px] px-12 rounded-lg ml-2 font-bold uppercase;
+  }
+
+  .editor p:has(img) {
+    @apply flex flex-wrap space-x-2 space-y-2;
+  }
+  .editor .ql-align-justify:has(img) {
+    @apply flex flex-wrap items-center justify-start space-x-2 space-y-2;
+  }
+  .editor .ql-align-center:has(img) {
+    @apply flex flex-wrap items-center justify-center space-x-2 space-y-2;
+  }
+  .editor .ql-align-right:has(img) {
+    @apply flex flex-wrap items-center justify-end space-x-2 space-y-2;
   }
 
   .popup {

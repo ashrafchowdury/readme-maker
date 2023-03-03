@@ -35,8 +35,8 @@ export function iconHandler() {
   tooltip.save = function () {
     const range = this.quill.getSelection(true);
     let iconName = this.textbox.value;
-    const icons = iconName.split(",");
-    if (icons) {
+    const icons = iconName?.replace(/\s+/g, '').split(",");
+    if (iconName) {
       icons?.reverse().map((value) => {
         this.quill.insertEmbed(
           range.index,

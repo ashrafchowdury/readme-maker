@@ -27,6 +27,7 @@ icons["video"] = null;
 icons["bold"] = null;
 icons["code"] = null;
 icons["italic"] = null;
+icons["align"] = null;
 
 let Keyboard = Quill.import("modules/keyboard");
 
