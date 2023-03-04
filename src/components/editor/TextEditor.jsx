@@ -3,7 +3,7 @@ import ReactQuill from "react-quill";
 import { GrammarlyEditorPlugin } from "@grammarly/editor-sdk-react";
 import "react-quill/dist/quill.snow.css";
 import Selector from "./Selector";
-import InlineSelector from "./InlineSelector";
+import { InlineSelector, ImageInline } from "./InlineSelector";
 import EditorMenu from "./EditorMenu";
 import {
   imageHandler,
@@ -20,6 +20,8 @@ const CustomToolbar = ({
   setselectIcons,
   placeholder,
   setplaceholder,
+  imageInline,
+  settextSelected,
 }) => {
   return (
     <div
@@ -30,7 +32,8 @@ const CustomToolbar = ({
         left: `${mouse.x}px`,
       }}
     >
-      <InlineSelector condition={inline} />
+      <InlineSelector condition={inline} settextSelected={settextSelected} />
+      <ImageInline condition={imageInline} settextSelected={settextSelected} />
       <Selector
         condition={selector}
         setisSelector={setisSelector}
@@ -84,17 +87,15 @@ const TextEditor = () => {
       },
     },
   };
-
   // handle inline selection component
   const handleToolTip = () => {
     const quillEdior = editor.current?.getEditor();
-    // console.log(window.getSelection());
     const position = quillEdior?.getBounds(quillEdior.getSelection()?.index);
 
     if (window.getSelection()?.anchorNode.data == undefined) {
       setplaceholder({ ...placeholder, display: true });
       if (window.getSelection()?.anchorNode.innerHTML?.includes("img")) {
-        settextSelected(window.getSelection()?.anchorNode.innerHTML);
+        settextSelected("$image");
       } else {
         settextSelected("");
       }
@@ -102,6 +103,7 @@ const TextEditor = () => {
       setplaceholder({ ...placeholder, display: false });
       settextSelected(window.getSelection().toString());
     }
+
     if (textSelected != "") {
       setmousePositionForSelectors({
         x: position.left - 80,
@@ -195,12 +197,16 @@ const TextEditor = () => {
       <div className="relative">
         <CustomToolbar
           mouse={mousePositionForSelectors}
-          inline={textSelected ? "" : "hidden"}
+          inline={
+            textSelected && !textSelected?.includes("$image") ? "" : "hidden"
+          }
+          imageInline={textSelected?.includes("$image") ? "" : "hidden"}
           selector={isSelector ? "" : "hidden"}
           setisSelector={setisSelector}
           setselectIcons={setselectIcons}
           placeholder={placeholder}
           setplaceholder={setplaceholder}
+          settextSelected={settextSelected}
         />
         <GrammarlyEditorPlugin clientId="client_CWguQMGT3AtvUQw7vdoKNk">
           <div onClick={handleSelectorPosition}>

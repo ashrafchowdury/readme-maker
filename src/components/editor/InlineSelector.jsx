@@ -4,15 +4,16 @@ import {
   BiItalic,
   BiUnlink,
   BiCodeAlt,
-  BiListUl,
   BiHeading,
 } from "react-icons/bi";
-import { CiAlignRight, CiAlignCenterV, CiAlignLeft } from 'react-icons/ci'
-const InlineSelector = ({ condition }) => {
+import { CiAlignRight, CiAlignCenterV, CiAlignLeft } from "react-icons/ci";
+export const InlineSelector = ({ condition, settextSelected }) => {
   const tooltipClass = document.querySelector(".ql-tooltip");
   const handleAddClass = () => {
     tooltipClass.classList.add("tooltipLink");
+    settextSelected("");
   };
+
   return (
     <section
       id="toolbar"
@@ -40,13 +41,13 @@ const InlineSelector = ({ condition }) => {
         <BiItalic />
       </button>
       <button class="ql-align" value="justify">
-      <CiAlignLeft />
+        <CiAlignLeft />
       </button>
       <button class="ql-align" value="center">
-      <CiAlignCenterV />
+        <CiAlignCenterV />
       </button>
       <button class="ql-align" value="right">
-      <CiAlignRight />
+        <CiAlignRight />
       </button>
       <button className="ql-link" onClick={handleAddClass}>
         <BiUnlink />
@@ -58,4 +59,29 @@ const InlineSelector = ({ condition }) => {
   );
 };
 
-export default InlineSelector;
+export const ImageInline = ({ condition, settextSelected }) => {
+  const tooltipClass = document.querySelector(".ql-tooltip");
+  const handleAddClass = () => {
+    tooltipClass.classList.add("tooltipLink");
+    settextSelected("");
+  };
+  return (
+    <section
+      id="toolbar"
+      className={`inlineSelector ${condition} w-[200px] h-[40px] bg-light dark:bg-dark rounded-lg flex items-center justify-between py-2 px-3`}
+    >
+      <button class="ql-align" value="justify">
+        <CiAlignLeft />
+      </button>
+      <button class="ql-align" value="center">
+        <CiAlignCenterV />
+      </button>
+      <button class="ql-align" value="right">
+        <CiAlignRight />
+      </button>
+      <button className="ql-link" onClick={handleAddClass}>
+        <BiUnlink />
+      </button>
+    </section>
+  );
+};

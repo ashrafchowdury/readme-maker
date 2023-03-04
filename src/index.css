@@ -114,19 +114,9 @@
   .popup {
     @apply absolute top-0 left-0 right-0 bottom-0 z-50 flex justify-center items-center;
   }
+
   .toolbar {
-    @apply !p-0 !bg-light dark:!bg-dark !border-0;
-  }
-  .toolbar .group {
     @apply !hidden;
   }
-  .toolbar .group .last-item {
-    @apply !hidden;
-  }
-  .toolbar .group .btn {
-    @apply text-xs !px-4 !py-1 font-semibold text-center bg-light dark:bg-dark !text-dark dark:!text-light !border-0 cursor-pointer;
-  }
-  .toolbar .group {
-    @apply !m-0 !border-0;
-  }
+
 }

@@ -35,7 +35,17 @@ const EditorMenu = ({ dataSaveIcon }) => {
     if (value?.includes('"></')) {
       const images = document.querySelectorAll("p > img"); // select all images
       if (images?.length == 1) {
-        copy();
+        if (value.length > 20) {
+          navigator.clipboard.writeText(
+            value
+              .replace(/class="ql-align-center"/g, 'align="center"')
+              .replace(/class="ql-align-right"/g, 'align="right"')
+              .replace(/class="ql-align-justify"/g, 'align="left"')
+          );
+          toast.success("Text copied successfully 👍");
+        } else {
+          toast.error("Pleace add enough text for copy");
+        }
       } else {
         images.forEach((image) => {
           const space = document.createTextNode("\u00A0"); // create a text node with the Unicode value of &nbsp;
