@@ -39,7 +39,13 @@
     @apply w-full min-h-[81vh] max-h-full !border border-light dark:border-dark rounded-lg p-7 overflow-hidden;
   }
   .editor p {
-    @apply text-lg !my-4;
+    @apply text-lg !my-4 !bg-lightBg dark:!bg-darkBg;
+  }
+  .editor span{
+    @apply !bg-lightBg dark:!bg-darkBg;
+  }
+  .editor p a{
+    @apply !text-primary !bg-lightBg dark:!bg-darkBg
   }
   .editor img {
     @apply cursor-pointer;
@@ -68,7 +74,7 @@
     @apply !text-[22px] py-2;
   }
   .editor .tooltipLink {
-    @apply bg-light dark:bg-dark text-darkBg dark:text-lightBg !border-none !shadow-none !py-3 !px-6 rounded-lg !left-6;
+    @apply bg-light dark:bg-dark text-darkBg dark:text-lightBg !border-none !shadow-none !py-3 !px-6 rounded-lg z-40;
   }
   .editor .tooltipLink input {
     @apply !w-[250px] bg-lightBg dark:bg-darkBg text-darkBg dark:text-lightBg rounded-lg !py-5 !px-3 !border-none outline-none;
@@ -118,5 +124,4 @@
   .toolbar {
     @apply !hidden;
   }
-
 }

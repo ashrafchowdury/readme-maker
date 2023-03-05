@@ -17,7 +17,6 @@ import { useEditor } from "../../utils/hooks/useEditor";
 
 const EditorMenu = ({ dataSaveIcon }) => {
   const { value, setValue, editor, seteditor } = useEditor();
-
   const handleCopy = async () => {
     const copy = () => {
       if (value.length > 20) {

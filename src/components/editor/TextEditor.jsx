@@ -88,34 +88,97 @@ const TextEditor = () => {
     },
   };
   // handle inline selection component
+  const editorWidth = document.querySelector(".editor")?.offsetWidth; // Replace 'myDiv' with the ID of your div element
+
   const handleToolTip = () => {
-    const quillEdior = editor.current?.getEditor();
-    const position = quillEdior?.getBounds(quillEdior.getSelection()?.index);
+    const quillEditor = editor.current?.getEditor();
+    const selection = quillEditor?.getSelection();
+    if (selection) {
+      const bounds = quillEditor.getBounds(selection?.index);
+      const tooltipWidth = 300; // adjust as needed
+      const tooltipHeight = 60; // adjust as needed
+      const margin = 10; // adjust as needed
 
-    if (window.getSelection()?.anchorNode.data == undefined) {
-      setplaceholder({ ...placeholder, display: true });
-      if (window.getSelection()?.anchorNode.innerHTML?.includes("img")) {
-        settextSelected("$image");
+      let x, y;
+      if (
+        bounds.right + tooltipWidth + margin <= window.innerWidth &&
+        bounds.right + tooltipWidth + margin <= editorWidth
+      ) {
+        // tooltip fits to the right of the selection
+        x = bounds.right + margin;
+      } else if (
+        bounds.left - tooltipWidth - margin >= 0 &&
+        bounds.left - tooltipWidth - margin >= editorWidth
+      ) {
+        // tooltip fits to the left of the selection
+        x = bounds.left - tooltipWidth - margin;
       } else {
-        settextSelected("");
+        // tooltip does not fit on either side, use the center
+        const selectionWidth = bounds.width;
+        const selectionMiddle = bounds.left + selectionWidth / 2;
+        x = selectionMiddle - tooltipWidth / 2;
       }
-    } else {
-      setplaceholder({ ...placeholder, display: false });
-      settextSelected(window.getSelection().toString());
-    }
 
-    if (textSelected != "") {
+      if (bounds.bottom + tooltipHeight + margin <= window.innerHeight) {
+        // tooltip fits below the selection
+        y = bounds.bottom + margin;
+      } else if (bounds.top - tooltipHeight - margin >= 0) {
+        // tooltip fits above the selection
+        y = bounds.top - tooltipHeight - margin;
+      } else {
+        // tooltip does not fit above or below, use the top of the window
+        y = margin;
+      }
+      // Calculate the middle of the selection and use that as the x coordinate
+      const selectionWidth = bounds.width;
+      const selectionMiddle = bounds.left + selectionWidth / 2;
+
+      // Calculate the available space on the left and right sides of the editor
+      const availableSpaceLeft = selectionMiddle - tooltipWidth / 2;
+      const availableSpaceRight =
+        editorWidth - (selectionMiddle + tooltipWidth / 2);
+
+      // Determine whether to center the tooltip, or align it left or right of the selection
+      if (availableSpaceLeft >= 0 && availableSpaceRight >= 0) {
+        x = selectionMiddle - tooltipWidth / 2;
+      } else if (availableSpaceLeft > availableSpaceRight) {
+        x = bounds.left - tooltipWidth - margin;
+      } else {
+        x = bounds.right + margin;
+      }
+
+      if (window.getSelection()?.anchorNode.data == undefined) {
+        setplaceholder({ ...placeholder, display: true });
+        if (window.getSelection()?.anchorNode.innerHTML?.includes("img")) {
+          settextSelected("$image");
+        } else {
+          settextSelected("");
+        }
+      } else {
+        setplaceholder({ ...placeholder, display: false });
+        settextSelected(window.getSelection().toString());
+      }
+
       setmousePositionForSelectors({
-        x: position.left - 80,
-        y: position.top - 60,
+        x,
+        y,
       });
     }
   };
 
   const placeholderPosition = (position, y, size, text) => {
+    let horizontalPosition;
+    if (position.left > 0 && position.left < 60) {
+      horizontalPosition = position.left + 5;
+    } else if (Math.round(position.left) == editorWidth  / 2) {
+      horizontalPosition = position.left - 130;
+    } else if (position.left > editorWidth / 2) {
+      horizontalPosition = position.left - 290;
+    }
+    console.log(Math.round(position.left), editorWidth  / 2);
     return setplaceholder({
       ...placeholder,
-      x: position.left + 5,
+      x: horizontalPosition,
       y: position.top + y,
       size: size,
       text: text,

@@ -27,6 +27,7 @@ const Navbar = ({ setsidebar }) => {
       window.removeEventListener("click", handleWindowClick);
     };
   }, [open]);
+
   useEffect(() => {
     //Handle the Theme when the page load
     const handleDark = () => {
@@ -61,8 +62,9 @@ const Navbar = ({ setsidebar }) => {
 
   return (
     <nav className=" w-full h-[100px] flex justify-between items-center">
-      <Link to="/">
-        <h1 className=" text-2xl lg lg:text-4xl font-bold ">Readme Maker</h1>
+      <Link to="/" className="flex items-center">
+        <img src="/logo.svg" alt="readme maker" className=" w-8 mr-2" />{" "}
+        <h1 className=" text-2xl lg lg:text-3xl font-bold ">Readme Maker</h1>
       </Link>
 
       <div className="navIcons flex items-center space-x-3">
